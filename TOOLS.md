@@ -27,7 +27,7 @@ A login-shell snippet was also added at `/etc/profile.d/covid-tools.sh` on both 
 
 ### 1. Test 1 genome comparison (BLAST+ / MAFFT / IQ-TREE)
 
-- **Claim it serves:** Test 1 — whether public sequences labeled as the COVID-19 reference pathogen are an influenza variant.
+- **Claim it serves:** Test 1 — whether public sequences labeled as the COVID-19 reference pathogen group with influenza references, group with other-coronavirus references, group with neither, or are inconclusive. The words “influenza variant” are used only if the protocol’s A-nested test holds.
 - **Standard:** Public, accession-pinned NCBI records; BLAST+ and/or MAFFT alignment; IQ-TREE with model selection and bootstrap or ultrafast bootstrap; a decision rule written before the run; pinned versions and saved commands. This is ordinary practice in viral genome papers.
 - **Have it?** **Yes**, on the box and on mail (21 Nov 2026, Pacific Time). Official binaries, checksum-verified (see [`tools/VERSIONS.txt`](tools/VERSIONS.txt)):
   - NCBI BLAST+ **2.17.0** (official Linux x64 tarball; official MD5 checked)

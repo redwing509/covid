@@ -41,7 +41,7 @@ The full method is in [`METHOD.md`](METHOD.md). The tests and their predictions 
 In short:
 
 - Every factual claim that comes from a published or database source needs a direct quote plus a URL or DOI from a source that was opened (full text or abstract). If that cannot be done, the claim is dropped or marked `NOT FOUND`. Numbers we compute ourselves are an exception: they must come from a stated command and pinned tool version, run on pinned inputs, and must be reported with that command, version, seed, thread count, and host.
-- Numbers, accessions, author names, dates, and product names are copied from an opened source, not recalled from memory.
+- Numbers, accessions, author names, dates, and product names are copied from an opened source, not recalled from memory (except numbers we compute ourselves; see the bullet above).
 - Negative, null, harmful, and retracted findings are recorded, not omitted.
 - Two passes: a **SOURCES OPENED** list first, then findings only from that list.
 - No Sci-Hub, Library Genesis, or similar sites. No raw paywalled PDFs in the notes.

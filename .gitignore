@@ -32,3 +32,14 @@ results/*.log
 results/test-01/*.fasta
 results/test-01/*.fa
 results/test-01/*.aln
+results/test-01/*.fna
+results/test-01/*.fas
+results/test-01/*.fasta.gz
+results/test-01/*.nhr
+results/test-01/*.nin
+results/test-01/*.nsq
+results/test-01/*.ndb
+results/test-01/*.not
+results/test-01/*.ntf
+results/test-01/*.nto
+results/test-01/*.njs

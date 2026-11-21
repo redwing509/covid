@@ -22,14 +22,14 @@ Seek, and then pin, using these selection rules:
 
 1. **Query set (Q).** On the opened official NCBI RefSeq (or equivalent official NCBI reference) page for the taxon labeled SARS-CoV-2, take the record the page marks as the reference sequence, if that mark is present. Also take any additional complete-genome reference records listed on that same page, up to a maximum of **five** query records, in the order they appear on the page. If the page cannot be opened, write `NOT FOUND` for Q and apply **C**.
 
-2. **Influenza reference set (S_flu).** From opened official NCBI RefSeq or Influenza Virus Resource reference pages, take complete genomes (every segment of that genome, when the record is segmented) as follows:
+2. **Influenza reference set (S_flu).** Open the official NCBI RefSeq influenza reference list (the RefSeq page or browse list for influenza A and influenza B references). If that RefSeq list cannot be opened, open the official NCBI Influenza Virus Resource “reference strains” or “reference sequences” page instead, and record which page was used. Do not pick a third page to change the subtype list. From that opened page, take complete genomes (every segment of that genome, when the record is segmented) as follows:
    - one complete genome per influenza A subtype that the opened official reference list marks as a reference, in the order listed, up to **twelve** influenza A genomes;
    - one influenza B complete-genome reference, if listed.
    If the official list has fewer entries, use those. Do not add subtypes that are not on the opened official reference list. If no influenza reference can be opened, write `NOT FOUND` for S_flu and apply **C**.
 
 3. **Other-coronavirus reference set (S_cov).** From opened official NCBI RefSeq pages, take the official complete-genome reference record, when it can be opened, for each of these labels and no others: HCoV-229E, HCoV-NL63, HCoV-OC43, HCoV-HKU1, SARS-CoV (the pre-2019 SARS reference as the page labels it), and MERS-CoV. If a label has no open record, write `NOT FOUND` for that label and continue with the records that were opened. If none of these can be opened, write `NOT FOUND` for S_cov and apply **C**. Do not add other coronavirus labels on run day.
 
-4. **Outgroup (required for the tree criteria in A, A-nested, and B).** From the opened official NCBI RefSeq viral catalog, take one complete-genome reference from a labeled family that is not Orthomyxoviridae and not Coronaviridae, chosen as follows: the official reference complete genome of the type species of family Paramyxoviridae, if a type species is marked and the record can be opened; otherwise the first listed Paramyxoviridae RefSeq complete genome on that catalog page. If that is `NOT FOUND`, apply the same rule to family Pneumoviridae. If both are `NOT FOUND`, still report BLAST and organization, and apply **C** for any tree decision. Do not pick a different outgroup family after seeing a tree. The tree used for A, A-nested, or B is rooted on this outgroup (or on the split that separates the outgroup from all other taxa). Do not infer monophyly from an unrooted tree.
+4. **Outgroup (required for the tree criteria in A, A-nested, and B).** From the opened official NCBI RefSeq viral catalog, take one complete-genome reference from a labeled family that is not Orthomyxoviridae and not Coronaviridae, chosen as follows: the official reference complete genome of the type species of family Paramyxoviridae, if a type species is marked and the record can be opened; otherwise the first listed Paramyxoviridae RefSeq complete genome on that catalog page. If that is `NOT FOUND`, apply the same rule to family Pneumoviridae. If both are `NOT FOUND`, still report BLAST and organization, and apply **C** for any tree decision. Do not pick a different outgroup family after seeing a tree. The outgroup family is chosen, before any tree is seen, only because it is labeled as neither Orthomyxoviridae nor Coronaviridae, so the root lies outside both test sets. That is a methodological rule, not a finding about relatedness. The tree used for A, A-nested, or B is rooted on this outgroup (or on the split that separates the outgroup from all other taxa). Do not infer monophyly from an unrooted tree.
 
 The S_flu and S_cov labels are taken from the official pages as labels to be used in the comparison. They are not themselves re-validated as a taxonomy finding in Test 1; that limitation is stated here.
 
@@ -51,7 +51,7 @@ BLAST database, built once per reference set (and a combined database is not req
 makeblastdb -in SET.fa -dbtype nucl -parse_seqids -out SET
 ```
 
-BLAST search, for each query record against each of S_flu and S_cov (and, separately, against the outgroup for the homology check):
+BLAST search. The query file is always a Q record (or, when the query is segmented, one Q segment). Build three databases with the command above: S_flu, S_cov, and the outgroup. Run the search of each Q record (or segment) against each of those three databases:
 
 ```bash
 blastn -task blastn -query QUERY.fa -db SET -evalue 1e-5 -max_target_seqs 1000 -max_hsps 20 \
@@ -69,6 +69,45 @@ mafft --auto --maxiterate 1000 --thread 1 in.fa > aln.fa
 
 Column filter, after MAFFT, without any extra package: drop every alignment column whose gap fraction is greater than 0.50. If fewer than **200** columns remain, or if the mean pairwise nucleotide identity in the remaining columns is below **30%**, the alignment is not informative; apply **C** and do not run IQ-TREE on it.
 
+Mean pairwise identity is computed with **pairwise deletion**, using only the Python standard library, as follows. For each unordered pair of sequences, ignore columns in which either character is a gap or `N`, and set that pair’s identity to matches / (matches + mismatches). The reported mean is the unweighted mean of those pair values. Pairs with no remaining columns are skipped; if every pair is skipped, the gate fails. The exact script must be saved in the run log before it is executed:
+
+```python
+import itertools, pathlib, sys
+
+def read_fa(path):
+    seqs, name, buf = [], None, []
+    for line in pathlib.Path(path).read_text().splitlines():
+        if line.startswith(">"):
+            if name is not None:
+                seqs.append((name, "".join(buf).upper()))
+            name, buf = line[1:].split()[0], []
+        else:
+            buf.append(line.strip())
+    if name is not None:
+        seqs.append((name, "".join(buf).upper()))
+    return seqs
+
+seqs = read_fa(sys.argv[1])
+L = {len(s) for _, s in seqs}
+if len(L) != 1:
+    raise SystemExit("alignment sequences have different lengths")
+pairs = []
+for a, b in itertools.combinations([s for _, s in seqs], 2):
+    m = n = 0
+    for x, y in zip(a, b):
+        if x in "-N" or y in "-N":
+            continue
+        n += 1
+        if x == y:
+            m += 1
+    if n:
+        pairs.append(m / n)
+if not pairs:
+    print("MEAN_PAIRWISE_IDENTITY=NA PAIRS=0")
+    raise SystemExit(2)
+print(f"MEAN_PAIRWISE_IDENTITY={sum(pairs)/len(pairs):.6f} PAIRS={len(pairs)}")
+```
+
 IQ-TREE, only on an alignment that passed the filter:
 
 ```bash
@@ -83,14 +122,14 @@ The support thresholds are fixed: **UFBoot ≥ 95** and **SH-aLRT ≥ 80** on th
 2. Download the FASTA records. Store them outside git if they are large (`data/raw/`), and record hashes and accessions in the notes. Small text outputs of this test (the run log, the `.iqtree` report, the treefile, and the BLAST tables) may be committed under `results/test-01/` (see `.gitignore`).
 3. Record genome organization as the records themselves describe it (for example, whether a record is a single complete genome or a set of segments, and the stated molecule type), quoting the record text. Do not infer an organization the record does not state. The fields compared, when present on the record, are: molecule type, number of segments or records per genome, topology, and stated length. If **neither** side of a comparison states an organization, drop the organization requirement for that comparison and decide on BLAST and, if applicable, the tree only. If one side states an organization and the other does not, or the stated organizations conflict with the BLAST or tree result, apply **C**.
 4. Run the pinned `blastn -task blastn` command of each query record against S_flu, against S_cov, and against the outgroup. Save the full tabular output. Summarize only numbers that appear in that output.
-5. **Qualifying hit (genome-level).** Group reference records by genome (all segments of one isolate or one versioned genome, as the opened records group them). For a query record and a reference genome, take every HSP in the BLAST table that passes `evalue ≤ 1e-5`. Compute **union query coverage** as the fraction of the query length covered by the union of those HSP query intervals (`qstart`–`qend`), with overlaps merged. The query has a qualifying hit to that reference genome if union query coverage is at least **50%**. The bitscore of that genome is the **highest** bitscore among those HSPs (do not sum bitscores). The **best** genome in a set is the qualifying genome with the highest bitscore. If two qualifying genomes are tied on that bitscore, they are tied; do not break the tie by judgment. Percent identity is recorded but is not the score used to decide “more similar.”
-   - If the query itself is deposited as a set of segments, compute union coverage and best bitscore **per query segment** against the reference set, then treat the query genome as having a qualifying hit in the set only if **every** query segment has a qualifying hit in that set. The genome-level bitscore is the sum of the per-segment best bitscores of those qualifying hits (here the sum is across the query's own segments, each compared once).
-6. **Homology gate, limited and pre-stated.** A query is treated as having a basis to align to a reference set only if it has at least one qualifying hit in that set. Apply the same check to the outgroup before using it in a tree: if the outgroup has no qualifying hit to at least one of Q, S_flu, or S_cov, write that result, do not use that outgroup to assess monophyly, and apply **C** for the tree decision (BLAST-only outcomes below may still be used).
+5. **Qualifying hit (genome-level, symmetric coverage).** Group reference records by genome (all segments of one isolate or one versioned genome, as the opened records group them). For a query record and a reference genome, take every HSP in the BLAST table that passes `evalue ≤ 1e-5`. Merge overlapping query intervals (`qstart`–`qend`) to get **covered query bases**, and merge overlapping subject intervals (`sstart`–`send`, taken as 1-based inclusive and converted to a positive interval if the HSP is on the opposite strand) across all segments of that reference genome to get **covered subject bases**. Let `Qlen` be the query length (`qlen`) and `Glen` be the sum of the lengths of that reference genome’s segments (from `slen` on each segment record, or from the opened sequence length if `slen` is missing). The **shorter-molecule coverage** is `covered_query_bases / min(Qlen, Glen)`. (Covered query bases and covered subject bases should be close to the aligned length; if they differ, use `max(covered_query_bases, covered_subject_bases) / min(Qlen, Glen)`.) The query has a qualifying hit to that reference genome if shorter-molecule coverage is at least **50%**. This is intentional: a long query cannot be blocked from matching a shorter reference genome solely because 50% of the longer molecule cannot be covered by the shorter one. The bitscore of that genome is the **highest** bitscore among those HSPs (do not sum bitscores). The **best** genome in a set is the qualifying genome with the highest bitscore. If two qualifying genomes are tied on that bitscore, they are tied; do not break the tie by judgment. Percent identity is recorded but is not the score used to decide “more similar.”
+   - If the query itself is deposited as a set of segments, compute shorter-molecule coverage and best bitscore **per query segment** against the reference set, then treat the query genome as having a qualifying hit in the set only if **every** query segment has a qualifying hit in that set. The genome-level bitscore is the sum of the per-segment best bitscores of those qualifying hits (here the sum is across the query's own segments, each compared once).
+6. **Homology gate, limited and pre-stated.** A query is treated as having a basis to align to a reference set only if it has at least one qualifying hit in that set (step 5). The outgroup check uses the same pinned command, with Q as the query and the outgroup as the database (step 4). Do not reverse that direction, and do not require a search of the outgroup against S_flu or S_cov. The outgroup may be used to root the tree if **at least one Q record has a qualifying hit to the outgroup** under step 5. If that condition fails, write the BLAST result, do not use the outgroup to assess monophyly, and apply **C** for the tree decision. BLAST-only outcomes (A-blast, B-blast) may still be used.
 7. **One-sided versus two-sided BLAST.**
    - If a query has a qualifying hit in **both** S_flu and S_cov, a combined alignment of Q plus both sets plus the outgroup may be built, provided organizations allow it (step 8).
    - If a query has a qualifying hit in **exactly one** of the two sets, do **not** force a combined MAFFT alignment of Q with both sets. Report the BLAST table and the organization quotes. Do not treat this as automatically **C**. Apply **A-blast** or **B-blast** if their other bullets hold, otherwise **C**.
    - If a query has a qualifying hit in **neither** set, apply **C**. Do not force a combined tree.
-8. If step 7 allows a combined alignment, and whole-genome alignment of mixed organizations is valid (do not mix segmented and unsegmented records in one alignment), build the alignment with the pinned MAFFT command, apply the column filter, and apply the 200-column / 30% identity gate. If mixed organizations would be required, or the gate fails, state that in the run log, do not force a tree, and apply **C** (unless A-blast or B-blast already applies from a one-sided BLAST result; a failed combined tree does not cancel a one-sided BLAST outcome that already held).
+8. If step 7 allows a combined alignment, first write each segmented genome as **one sequence** so that segmented and unsegmented records can be placed in the same alignment: concatenate that genome’s segments in **increasing segment number** as stated on the opened records; if no segment number is stated, concatenate in the order the records appear on the opened genome page. Insert a spacer of **ten `N` characters** between segments. Do not reverse-complement a segment unless the opened record itself states that the deposited orientation is the opposite of the virus’s plus-strand, and then quote that statement. After concatenation, treat the genome as a single sequence for MAFFT. Build the alignment of Q plus both reference sets plus the outgroup with the pinned MAFFT command, apply the column filter, and apply the 200-column / 30% identity gate using the pinned script. If the gate fails, state that in the run log, do not force a tree, and apply **C** (unless A-blast or B-blast already applies from a one-sided BLAST result; a failed combined tree does not cancel a one-sided BLAST outcome that already held). Molecule-type conflicts are still handled by step 3; concatenation is only a representation rule for segmented records, not a claim that the organizations are the same.
 9. If the filtered alignment passed the gate, run the pinned IQ-TREE command. Root the tree on the outgroup as stated above. Save the command line, the `.iqtree` report, the treefile, and the run log, and record whether the report labels the tree as rooted.
 10. Apply the decision rule below. Do not change the rule after seeing the tree or the BLAST table.
 
@@ -107,7 +146,7 @@ Let **S_flu** be the influenza A/B reference set and **S_cov** be the other-coro
 - Each query’s best **S_flu** bitscore is strictly higher than its best **S_cov** bitscore.
 - The organization rule in step 3 is satisfied and matches **S_flu**, not **S_cov**, when organization is used.
 
-**A-nested. Supports a stronger claim, “nested within influenza references” (the only outcome that may be described as consistent with an “influenza variant” wording).** All of A holds, and in addition, in the same rooted tree, **S_flu** is not monophyletic without Q: at least one S_flu genome is more closely related to Q than to at least one other S_flu genome, with UFBoot and SH-aLRT at or above their thresholds on the relevant internal branch. If A holds but this nesting test does not, report **A** only, and do not use the words “influenza variant” in the Test 1 conclusion.
+**A-nested. Supports a stronger claim, “nested within influenza references” (the only outcome that may be described as consistent with an “influenza variant” wording).** All of A holds, and in addition, in the same rooted tree, there is a supported clade that contains Q and a proper, non-empty subset of S_flu and that excludes at least one other S_flu genome, with UFBoot and SH-aLRT at or above their thresholds on the branch that defines that clade. If A holds but this nesting test does not, report **A** only, and do not use the words “influenza variant” in the Test 1 conclusion.
 
 **A-blast. Supports “groups with influenza references by the BLAST rule only (no combined tree).”** All of the following hold, and a combined tree was not built because the other set had no qualifying hit:
 
@@ -130,6 +169,7 @@ Let **S_flu** be the influenza A/B reference set and **S_cov** be the other-coro
 - Tree topology and BLAST bitscores disagree.
 - Genome organization, as quoted from the records, conflicts with the tree or BLAST result, or the quoted organization matches both sets, or matches neither set when the records state an organization, or one side states an organization and the other does not.
 - A query has no qualifying BLAST hit in either reference set, or the best qualifying bitscores are tied, or a combined alignment is not valid because of organization, length, or the alignment-quality gate, and A-blast / B-blast also do not hold.
+- The query set has more than one record, and those records would not all receive the same letter (for example, some are one-sided and others have hits in both sets). Report each record’s BLAST result and apply **C** (sub-code C-mixed).
 - The outgroup is missing, has no qualifying-hit basis to be used, or the tree is unrooted, so the monophyly tests in A, A-nested, and B cannot be applied, and A-blast / B-blast also do not hold.
 - A supported rooted topology places Q outside both `{Q + S_flu}` and `{Q + S_cov}` (groups with neither).
 - Records cannot be opened or downloaded; write `NOT FOUND` for the missing set.
@@ -140,9 +180,22 @@ If **C** applies, both “groups with influenza references” and “groups with
 
 A **bug** is only a difference from a pre-registered command, a documented non-zero exit, a crash, or a truncated output file. Disliking a support value or a letter is not a bug.
 
-If a bug is found, fix the command so that it matches this protocol, re-run with the same `--seed 12345`, the same inputs, and `-T 1`, and keep **both** the failed output and the new output. Explain the difference in the run log. The later run is the decision run only if the change is a documented bug of that kind. Do not re-run in order to cross a support threshold.
+The **decision host** for the published Test 1 letter is the box. Mail may be used as a reproduction check with the same commands, seed, inputs, and `-T 1`. If both hosts are run and they disagree on the decision letter, report both outputs and apply **C**.
+
+If a bug is found, fix the command so that it matches this protocol, re-run on the decision host with the same `--seed 12345`, the same inputs, and `-T 1`, and keep **both** the failed output and the new output. Explain the difference in the run log. The later run is the decision run only if the change is a documented bug of that kind. Do not re-run in order to cross a support threshold.
 
 Computed numbers in the write-up must include the pinned command, tool version, seed, thread count, host, input accessions, download dates, and file hashes, as required by [`METHOD.md`](../METHOD.md).
+
+## On-paper reachability (not a run)
+
+This check is made on the written rule, without opening research genomes. It records that each decisive letter can be reached under at least one plausible combination of record properties:
+
+- **A** and **B** can be reached when Q has a qualifying hit (symmetric shorter-molecule coverage) in both S_flu and S_cov, segmented genomes are concatenated as in step 8, the alignment passes the quality gate, and the rooted tree meets the UFBoot and SH-aLRT tests in the corresponding direction.
+- **A-nested** can be reached when A holds and, in addition, Q falls inside a supported clade with a proper, non-empty subset of S_flu.
+- **A-blast** can be reached when every Q record has a qualifying hit in S_flu and none in S_cov, including the case of a long unsegmented query whose covered bases are at least 50% of the shorter of `Qlen` and the influenza genome length.
+- **B-blast** can be reached when every Q record has a qualifying hit in S_cov and none in S_flu, under the same coverage rule.
+
+If a later amendment were to make any of those letters unreachable for all plausible record properties, that amendment would be a protocol defect, not a result.
 
 ## Reporting
 
