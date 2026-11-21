@@ -43,3 +43,12 @@ results/test-01/*.not
 results/test-01/*.ntf
 results/test-01/*.nto
 results/test-01/*.njs
+results/test-01/*.nog
+results/test-01/*.nos
+results/test-01/*.uniqueseq.phy
+results/test-01/*.mldist
+results/test-01/*.bionj
+results/test-01/*.ckp.gz
+results/test-01/*.model.gz
+results/test-01/*.contree
+results/test-01/*.splits.nex
