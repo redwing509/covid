@@ -18,7 +18,7 @@ Use the **highest design the opened source actually is**, not the highest design
 
 ## Citation honesty
 
-1. **Quote plus locator.** Every factual claim includes a direct quote of the supporting sentence and that source’s URL or DOI. Drop any claim that lacks both.
+1. **Quote plus locator.** Every factual claim that comes from a published or database source includes a direct quote of the supporting sentence and that source’s URL or DOI. Drop any such claim that lacks both. Numbers we compute ourselves are an exception: they must come from a stated command and pinned tool version, run on pinned inputs (accessions, dates of download, and file hashes when a file is saved), and must be reported with that command and version, not as if they were quoted from a paper. See “Work we run ourselves” below.
 2. **`NOT FOUND`, never a guess.** When a search finds nothing, write `NOT FOUND` and say what was searched. Never fill gaps from memory.
 3. **Copy, don’t recall.** Do not write numbers, sequence accessions, institution names, author names, dates, or product or formula names unless they are copied from a source opened for that check.
 4. **Two passes on a fresh search.** Pass 1 is only a **SOURCES OPENED** list (URL or DOI, title, one quote, and `full text` / `abstract only` / `not opened`). Pass 2 writes findings only from that list.
