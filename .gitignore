@@ -1,0 +1,26 @@
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.*
+*.pem
+*.key
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Downloaded sequence data and tool outputs (pin accessions in docs, do not commit bulk FASTA)
+data/raw/
+data/cache/
+results/*.fasta
+results/*.fa
+results/*.aln
+results/*.treefile
+results/*.iqtree
+results/*.log

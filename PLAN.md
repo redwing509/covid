@@ -1,0 +1,87 @@
+# Plan
+
+**Status (21 Nov 2026, Pacific Time):** plan and pre-registered Test 1 decision rule only. No sources for findings have been opened in this repository yet. No tools have been run. No hypothesis has been accepted or rejected.
+
+This file lists the testable predictions of each claim and how each will be checked. Methods and citation rules are in [`METHOD.md`](METHOD.md). Programs are in [`TOOLS.md`](TOOLS.md).
+
+## Order of work
+
+1. **Test 1 first** — classification of the public sequences labeled as the COVID-19 reference pathogen (influenza variant or not). Open question; no starting assumption. Protocol: [`tests/TEST-01-genome-classification.md`](tests/TEST-01-genome-classification.md).
+2. **Pathogen-existence and transmission checks** that H-A needs, and that H-B must also confront (isolation and culture, electron microscopy, household and other transmission studies, animal challenge studies, variant tracking).
+3. **H-B immune-compromise checks** (illness rates versus 5G rollout timing, location, and speed; pre-5G pandemics; places with no 5G; seasonality; controlled RF-exposure immune-marker studies, including nulls; dose-response; SAR at deployed power; any peer-reviewed paper that claims a 5G–COVID or 5G–immune link, including retractions).
+
+The first research run, including Test 1 compute, waits until after the usage reset at **Mon 23 Nov 2026, 9:49 PM Pacific Time**, unless a later note marks a step as tiny enough to do sooner. No Hermes survey is started for this project yet. No email is sent.
+
+## Test 1 — is the COVID-19 pathogen an influenza variant? (open)
+
+**Question.** Public databases contain sequences labeled as the reference pathogen for COVID-19 (commonly labeled SARS-CoV-2). Are those sequences an influenza variant (grouping with influenza A and/or influenza B references), or do they group with something else (including sequences labeled as other coronaviruses), or is the comparison inconclusive?
+
+**This question is open.** The plan does not assume either answer. James asked that the project not treat the classification as already proved (t1227u). The comparison is run at a peer-review standard, and the result is reported as-is.
+
+**How it will be checked.** A genome comparison of public NCBI records, with versions pinned and a decision rule written before the run. Tools: BLAST and/or MAFFT alignment, plus a phylogenetic tree with IQ-TREE. Full protocol and decision rule: [`tests/TEST-01-genome-classification.md`](tests/TEST-01-genome-classification.md).
+
+**What would support “influenza variant”.** Under the pre-registered rule, the query sequences cluster with the influenza A/B reference set, to the exclusion of the other-coronavirus reference set, with support above the stated threshold, and their recorded genome organization matches the influenza references.
+
+**What would support “not an influenza variant”.** Under the same rule, the query sequences cluster with the other-coronavirus reference set, to the exclusion of the influenza A/B set, with support above the stated threshold, and their recorded genome organization matches those other-coronavirus references.
+
+**What would be inconclusive.** Support below the threshold, conflicting organization versus tree, missing records, or a topology that matches neither set. Both answers remain open.
+
+Later tests may still use the database label SARS-CoV-2 as a search term. They must not treat Test 1 as settled until that write-up is citation-checked.
+
+## H-A — pathogen-primary: testable predictions
+
+If infectious pathogens are the primary cause of the illnesses under review, and host factors only modify risk, then the opened evidence should show some or all of the following. Each item is a check, not a finding.
+
+| Check | Prediction if H-A is right | How it will be checked |
+|---|---|---|
+| Isolation and culture | The pathogen associated with COVID-19 can be isolated and cultured by independent labs, with methods and results quoted from opened papers | Literature review; grade design; include failed or disputed isolation claims and replies |
+| Whole-genome sequencing and public databases | Independent deposits exist in public sequence databases (NCBI and, where a legitimate open view is available, GISAID). Counts and accessions are copied from an opened page or a dated query, never recalled | Opened database pages or API snapshots, with query and date recorded |
+| Electron microscopy | Images and measurements of particles from infected samples are published and can be opened | Literature review; quote what the paper actually shows |
+| Transmission | Illness clusters in households and other close-contact settings in a way the studies attribute to transmission of the pathogen, including settings where 5G exposure is absent or unchanged | Household and outbreak studies; ships, prisons, and other closed settings as the sources describe them |
+| Animal challenge (Koch-style) | Inoculating a suitable animal with the isolated pathogen produces the illness, and the same pathogen can be recovered, as the opened studies report | Hamster, macaque, or other models named in opened sources; quote outcomes, including nulls |
+| Phylogenetic tracking of variants | Sequences change over time in a connected tree that matches the geographic spread reported in opened sources | Published trees and, later, a Nextstrain or IQ-TREE run on public sequences (separate from Test 1) |
+| Illness without a new RF rollout | Similar respiratory pandemics and seasonal flu/cold patterns exist before 5G, and in places with no 5G, if the opened records show that | Historical surveillance (the sources will be opened for 1918, 1957, 1968, and 2009, and for seasonal ILI); places and ships the sources describe as having no 5G |
+
+H-A does **not** require that host factors are irrelevant. It requires that the pathogen is the main cause of the illness patterns.
+
+## H-B — immune-compromise-primary: testable predictions
+
+If 5G exposure compromises immune function, and that compromise — more than the pathogen — is the main driver of COVID, flu, cold, and other illness rates, then the opened evidence should show some or all of the following. Each item is a check, not a finding.
+
+| Check | Prediction if H-B is right | How it will be checked |
+|---|---|---|
+| Timing, location, and speed of 5G rollout | Respiratory illness rates (ILI / flu surveillance, and COVID as reported) rise where and when 5G was commercially deployed, and rise more where rollout was faster, after stated confounders are taken into account | An ecological time-series and regression script with confounder controls (see [`TOOLS.md`](TOOLS.md)). Rollout dates and locations from opened official or industry records; illness rates from opened surveillance sources |
+| Places with no 5G | Illness rates attributed to COVID, flu, or colds are absent, delayed, or clearly lower in places and settings the opened sources describe as having no 5G, including ships at sea when that is what the record shows | Same analysis; pre-specify how “no 5G” is defined from opened coverage maps or official statements |
+| Pre-5G pandemics | If H-B is the *main* driver of this class of illness, large flu-like pandemics before 5G need an explanation that does not rely on 5G. If those pandemics are well documented, that weighs against H-B as a general account of “why most people get the flu or a cold.” If the opened historical record does not support those events as claimed, that must be reported too | Opened historical and WHO or national surveillance sources for 1918, 1957, 1968, and 2009, and for ordinary seasonal flu and colds |
+| Seasonality that predates 5G | Seasonal flu and cold patterns that clearly predate 5G weigh against 5G as the main reason most people get those illnesses. A 5G effect could still be claimed as an added risk; that narrower claim would then be tested separately and not treated as the main-driver claim | Opened long-running ILI and cold surveillance series, with dates copied from the source |
+| Controlled RF-exposure and immune markers | At power levels comparable to deployed 5G (or the paper’s stated dose), human and animal studies show changes in immune markers (lymphocyte counts, cytokines, NK activity, or other markers the papers actually measure) | Graded review of controlled studies; **include nulls**; risk-of-bias grading; later a PRISMA-style meta-analysis if enough comparable studies exist |
+| Dose-response | Stronger or longer exposure is associated with larger immune-marker changes and/or higher illness rates, in opened studies or in our pre-registered analysis | Extract dose and outcome from opened papers; test for a dose-response in the ecological script where exposure can be stated |
+| RF physics and SAR | A plausible physical path exists from deployed 5G power and frequency to immune-relevant tissue dose | Photon energy versus chemical bond energies, from opened constants; SAR at deployed power, reusing the cancer project’s Meep RF absorption tools and published tissue parameters, labeled model-only |
+| Published 5G–COVID or 5G–immune papers | Peer-reviewed papers that claim a 5G–COVID link, or a 5G–immune effect, are in the review, checked, and graded, including retractions | Literature search; retraction watches; quote both the claim and the retraction notice when one exists |
+
+**Confounders** that the ecological analysis must address, when the data exist: testing volume and case definitions, age structure, population density, mobility, season, vaccination and prior infection (as the sources define them), other air pollutants, socioeconomic measures, and policy changes (lockdowns, school closure, and similar). If a confounder cannot be obtained, say `NOT FOUND` and run the sensitivity analysis without it, rather than ignoring the gap.
+
+## The “cover” claim
+
+The original request also asked whether the virus claim was a cover for 5G deployment. That is a claim about cause and about what was said, not a third physical mechanism.
+
+- If Test 1 and the isolation, imaging, transmission, and challenge checks support a circulating pathogen that produces the illness in the absence of a change in 5G exposure, that weighs against the claim that the pathogen was only a cover.
+- If illness rates track 5G rollout after confounders, and controlled studies show immune compromise at deployed doses, and the pathogen checks fail or are weak, that weighs in favor of 5G as the main driver and makes the cover claim a live question about communications, which would then need opened primary documents, not inference alone.
+- Communications and intent are not assumed from a scientific result. Official statements, leaked or formal documents, and contemporaneous coverage are quoted only when opened, and are graded as documentary evidence, not as laboratory evidence.
+
+## What will not be done yet
+
+- No heavy compute and no Hermes literature survey until after the usage reset, except a step later marked as tiny.
+- No install of BLAST, MAFFT, IQ-TREE, R, or other new packages until James OKs that install (see [`TOOLS.md`](TOOLS.md)).
+- No GitHub push, and no email.
+
+## GitHub / remote
+
+The cancer-cure project lives at the public repository [github.com/redwing509/cancer-cure](https://github.com/redwing509/cancer-cure). This Covid project is **kept local** at `/workspace/covid` for now, because:
+
+- James has not yet said to create a GitHub repository for Covid.
+- Creating a **private** repository would not match cancer-cure, which is public.
+- Creating a **public** repository is an external publish step and should wait for James's yes.
+- Nothing is pushed without the full review set (t997u) in any case.
+
+If James wants a remote, the consistent match to cancer-cure would be a public `redwing509/covid` repository, created empty or from this skeleton after the review set, with merges only after his yes.
