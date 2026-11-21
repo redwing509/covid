@@ -1,0 +1,88 @@
+# Covid evidence-review tools — pinned official / distro / PyPI packages
+# Installed: Saturday, 21 Nov 2026, about 9:46 AM–10:00 AM America/Los_Angeles (Pacific Time)
+# Authorization: James t1227u / t1227s6218
+# Hosts: the box and mail, prefix /opt/covid-tools
+# Not installed on: rig1, James's laptop
+# Nextstrain / Augur was optional and was not installed.
+# Test 1 itself was not run.
+
+# --- Official binaries (same tarballs on both hosts) ---
+
+NCBI BLAST+ 2.17.0 (1 Jul 2025)
+  url:    https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.17.0+-x64-linux.tar.gz
+  md5:    bdec166721de3b55f90a3badc83538e8
+          (from official ncbi-blast-2.17.0+-x64-linux.tar.gz.md5 on the same FTP directory)
+  sha256: 3888112d8207831aa47371d93583c601f058f88b5db22dc782438b039a3a411b
+          (computed after download; matches the published BioJulia Artifacts.toml pin for this file)
+  path:   /opt/covid-tools/ncbi-blast-2.17.0+/bin/blastn
+  link:   /opt/covid-tools/bin/blastn  (also makeblastdb, blastp)
+
+MAFFT 7.526 (26 Apr 2024), official portable Linux package
+  url:    https://mafft.cbrc.jp/alignment/software/mafft-7.526-linux.tgz
+  sha256: bf59d016f1b2030bc7fc83b7715ae1f0823570de3bd059c26eb522a72f9c2952
+          (computed after download from the official URL; the official site did not offer a checksum file)
+  path:   /opt/covid-tools/mafft-linux64/mafft.bat
+  link:   /opt/covid-tools/bin/mafft  (wrapper; the official mafft.bat uses dirname of its own path)
+  note:   the tarball ships directories as mode 750; after extract, permissions were set with chmod -R a+rX
+          so non-root users can run it. Ownership set to root:root.
+
+IQ-TREE 3.1.4 (10 Sep 2026), official Linux intel build
+  url:    https://github.com/iqtree/iqtree3/releases/download/v3.1.4/iqtree-3.1.4-Linux-intel.tar.gz
+  sha256: d422cb2b8f04825faea753afda25c60de6611537d07ec8fcd0033e70cb042839
+          (GitHub release asset digest, then checked on the box and again on mail)
+  path:   /opt/covid-tools/iqtree-3.1.4-Linux-intel/bin/iqtree3
+  link:   /opt/covid-tools/bin/iqtree3  and  /opt/covid-tools/bin/iqtree
+  note:   a non-fatal runtime message, "libarcher.so: cannot open shared object file", appeared
+          on both hosts. The bundled example.phy smoke test still completed and wrote a tree.
+
+# --- R and metafor (distro packages, --no-install-recommends) ---
+
+Box (Debian 13 / trixie):
+  r-base-core     4.5.0-3
+  r-cran-metafor  4.8-0-1     (packageVersion 4.8.0)
+  r-cran-metadat  1.2-0-2     (packageVersion 1.2.0)
+  also installed as Depends: r-cran-digest 0.6.37-1, r-cran-lattice 0.22-7-1,
+    r-cran-mathjaxr 1.8-0-1, r-cran-matrix 1.7-3-1, r-cran-nlme 3.1.168-1,
+    r-cran-numderiv 2016.8-1.1-3, r-cran-pbapply 1.7-2-1, libpaper-utils, zip
+
+Mail (Ubuntu 24.04 / noble):
+  r-base-core     4.3.3-2build2
+  r-cran-metafor  4.4-0-1     (packageVersion 4.4.0)
+  r-cran-metadat  1.2-0-2     (packageVersion 1.2.0)
+
+# --- Python venv at /opt/covid-tools/venv ---
+
+Box:  Python 3.13.5  (venv)
+Mail: Python 3.12.3  (venv)
+
+Primary packages, official PyPI SHA-256 checked before install:
+
+  biopython 1.88
+    cp313: 410eaa083fcc308b44c7051e597ae2f39e4068754bdd605cc32aed025aa132d0
+    cp312: 9384c30460832926e765319040d732d1252a713a05af1dd4cc8b19cb1d590439
+  scipy 1.18.1
+    cp313: fdaf5ea890a6183d0565f51a61799d67081bd5b1cf03c5f4b3fd3732108625c9
+    cp312: f55fa87b6c612ecd6b058f167c53231b1d14e412efe361d3d6e38b3631c73218
+  statsmodels 0.15.0
+    cp313: bcaa1e4499697c4e023e5fa6fb04459a34e4f4a449c45ae441992e933bde24db
+    cp312: c6f2bd48915cc9b3b95c3c7f6ac363b6f8aaa38172962ba5f7f6885f0dfe57f2
+  numpy 2.5.5 (dependency)
+    cp313: 824025655df929268bfe6b47ed91a00d14209a6f760847cf150be446829e1ce4
+    cp312: 704d819265e5d1064d932968e9ee85fff2103ccc78c05b878c06943ba27b8507
+  pandas 3.1.1 (dependency)
+    cp313: 645fa00fd85cfced2d2c09dc116d3694f578501b1ce4899153fbe64788ecda98
+    cp312: 028490c8ac2e03e18c9b08b7f3612e149b03570209bcf741d23833a7a5377ab2
+  wrapt 2.5.2 (dependency of formulaic; pinned to the latest stable, not a dev build)
+    cp313: 8b039b3a296762db1908d6108365225393c4fb33c1dbc5f00aa36f8302eaeaa0
+    mail used the cp312 wheel resolved by pip (same version 2.5.2)
+
+Other venv dependencies (versions on both hosts after install): formulaic 1.2.2,
+interface-meta 2.0.1, narwhals 2.29.0, packaging 26.3, patsy 1.0.3,
+python-dateutil 4.0.0, typing-extensions 4.16.0, tzdata 2026.6.
+Full wheel SHA-256 lists: /opt/covid-tools/dist/pypi-cp313/SHA256SUMS on the box.
+
+# --- How to use ---
+
+  source /opt/covid-tools/env.sh
+  # or prepend /opt/covid-tools/bin and /opt/covid-tools/venv/bin to PATH
+  # A profile.d snippet was also installed: /etc/profile.d/covid-tools.sh

@@ -1,6 +1,6 @@
 # Plan
 
-**Status (21 Nov 2026, Pacific Time):** plan and pre-registered Test 1 decision rule only. No sources for findings have been opened in this repository yet. No tools have been run. No hypothesis has been accepted or rejected.
+**Status (21 Nov 2026, Pacific Time):** plan and pre-registered Test 1 decision rule, plus the authorized tool install (t1227s6218). No sources for findings have been opened in this repository yet. No Test 1 run has been started. Smoke tests of the installed tools used only constructed sequences and the IQ-TREE bundled example, not research genomes. No hypothesis has been accepted or rejected.
 
 This file lists the testable predictions of each claim and how each will be checked. Methods and citation rules are in [`METHOD.md`](METHOD.md). Programs are in [`TOOLS.md`](TOOLS.md).
 
@@ -71,17 +71,10 @@ The original request also asked whether the virus claim was a cover for 5G deplo
 
 ## What will not be done yet
 
-- No heavy compute and no Hermes literature survey until after the usage reset, except a step later marked as tiny.
-- No install of BLAST, MAFFT, IQ-TREE, R, or other new packages until James OKs that install (see [`TOOLS.md`](TOOLS.md)).
-- No GitHub push, and no email.
+- No Test 1 run, no heavy compute, and no Hermes literature survey until after the usage reset, except a step later marked as tiny.
+- The BLAST+, MAFFT, IQ-TREE, R/metafor, and Python statistics install is done (t1227s6218; see [`TOOLS.md`](TOOLS.md)). Further new packages still need a separate OK. No installs on rig1 or the laptop.
+- No email.
 
 ## GitHub / remote
 
-The cancer-cure project lives at the public repository [github.com/redwing509/cancer-cure](https://github.com/redwing509/cancer-cure). This Covid project is **kept local** at `/workspace/covid` for now, because:
-
-- James has not yet said to create a GitHub repository for Covid.
-- Creating a **private** repository would not match cancer-cure, which is public.
-- Creating a **public** repository is an external publish step and should wait for James's yes.
-- Nothing is pushed without the full review set (t997u) in any case.
-
-If James wants a remote, the consistent match to cancer-cure would be a public `redwing509/covid` repository, created empty or from this skeleton after the review set, with merges only after his yes.
+The consistent match to [github.com/redwing509/cancer-cure](https://github.com/redwing509/cancer-cure) is the public repository [github.com/redwing509/covid](https://github.com/redwing509/covid). James asked that this reviewed skeleton be published there (t1227s6218). Later changes still go through the full review set (t997u), and merges to `main` still need James's yes.

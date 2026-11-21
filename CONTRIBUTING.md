@@ -6,7 +6,7 @@ Contributions that help are: additional published sources, corrections to quotes
 
 ## How to submit
 
-When a remote exists, open an issue or a pull request targeting `main`. Until then, keep changes local on this copy. Include a clear description and the opened source (URL, DOI, or accession) for every factual claim. Quote the supporting sentence.
+Open an issue or a pull request targeting `main` on [redwing509/covid](https://github.com/redwing509/covid). Include a clear description and the opened source (URL, DOI, or accession) for every factual claim. Quote the supporting sentence.
 
 Do not submit:
 

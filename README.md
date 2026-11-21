@@ -5,9 +5,9 @@
 > Do not start, stop, or replace any treatment on the basis of these notes.
 > Results, when they exist, are reported as graded evidence, not as a recommendation.
 
-**Status (21 Nov 2026, Pacific Time):** project skeleton only. No research run has started. No genome comparison has been run. No conclusion has been reached on any hypothesis. The first research run waits until after the usage reset at **Mon 23 Nov 2026, 9:49 PM Pacific Time**, unless a later note marks a step as tiny enough to do sooner.
+**Status (21 Nov 2026, Pacific Time):** project skeleton plus the authorized tool install (t1227s6218). No research run has started. No genome comparison has been run. No conclusion has been reached on any hypothesis. The first research run waits until after the usage reset at **Mon 23 Nov 2026, 9:49 PM Pacific Time**.
 
-This project was started at James's request (t1225u, confirmed t1225s6200; hypotheses clarified t1226u and t1227u). It is an evidence review. Evidence decides. Results are reported whichever way they land. There is **no email** on this project. Nothing is pushed to a remote or merged without the full review set and James's yes.
+This project was started at James's request (t1225u, confirmed t1225s6200; hypotheses clarified t1226u and t1227u). It is an evidence review. Evidence decides. Results are reported whichever way they land. There is **no email** on this project. Nothing is pushed to a remote or merged without the full review set and James's yes, except the initial publication of this reviewed skeleton to the public repository [redwing509/covid](https://github.com/redwing509/covid) when James asked for that (t1227s6218).
 
 ## Goal
 
@@ -85,12 +85,13 @@ These are the same rules used on the cancer-cure project (James, t1084u, and the
 - [`METHOD.md`](METHOD.md) — citation rules, evidence scale, how entries are written
 - [`PLAN.md`](PLAN.md) — testable predictions of each claim, and how each will be checked
 - [`tests/TEST-01-genome-classification.md`](tests/TEST-01-genome-classification.md) — pre-registered protocol and decision rule for Test 1 (no results yet)
-- [`TOOLS.md`](TOOLS.md) — programs needed, whether we have them, and the peer-review standard for each
-- [`ROTATION.md`](ROTATION.md) — a suggestion for how this project could fit the daily research rotation; it does **not** change the existing rotation
+- [`TOOLS.md`](TOOLS.md) — programs needed, whether we have them, pinned versions, and the peer-review standard for each
+- [`tools/VERSIONS.txt`](tools/VERSIONS.txt) — checksum-pinned install record (copied from `/opt/covid-tools/VERSIONS`)
+- [`ROTATION.md`](ROTATION.md) — how this project fits the daily research rotation (James, t1227s6218)
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — how changes are reviewed
 - [`LICENSE`](LICENSE) — MIT for software; CC BY 4.0 for original notes
 
-This copy is **local** on the box (`/workspace/covid`). It is not on GitHub yet. See the note at the end of [`PLAN.md`](PLAN.md).
+The public repository is [github.com/redwing509/covid](https://github.com/redwing509/covid), consistent with [redwing509/cancer-cure](https://github.com/redwing509/cancer-cure). A working copy also lives on the box at `/workspace/covid`.
 
 ## License
 

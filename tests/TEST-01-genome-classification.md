@@ -2,7 +2,7 @@
 
 **Status (21 Nov 2026, Pacific Time):** protocol and decision rule only. **Not run.** No accessions have been copied from an opened NCBI page into this file. No alignment or tree has been produced. The classification question is **open**. This file does not assume that the query sequences are an influenza variant, and it does not assume that they are not.
 
-**When it will run:** after the usage reset at Mon 23 Nov 2026, 9:49 PM Pacific Time, and after James OKs install of any missing tools listed below, unless a later note marks a tiny first step (for example, copying accessions from opened NCBI pages into a source list) as allowed sooner.
+**When it will run:** after the usage reset at Mon 23 Nov 2026, 9:49 PM Pacific Time. The tool install was authorized and completed on 21 Nov 2026 (t1227s6218; see [`TOOLS.md`](../TOOLS.md)). Do not start this test before the reset. A later note may still mark a tiny first step (for example, copying accessions from opened NCBI pages into a source list) as allowed sooner.
 
 Follow [`METHOD.md`](../METHOD.md). Results will be reported as-is.
 
@@ -33,7 +33,7 @@ Intended standard tools (peer-review practice in viral genomics):
 
 Pin the exact package names and version strings in the run log before looking at the tree. A wrapper script, once written, will live under `tools/` in this repository, MIT-licensed, and will not be pushed until it passes the full review set.
 
-**What we have today (21 Nov 2026, Pacific Time, checked on the box):** BLAST, MAFFT, IQ-TREE, Nextstrain/Augur, Biopython, and R were **not** found on the box. See [`TOOLS.md`](../TOOLS.md). Installing them needs James's OK.
+**What we have today (21 Nov 2026, Pacific Time, checked on the box and on mail):** NCBI BLAST+ 2.17.0, MAFFT 7.526, IQ-TREE 3.1.4, and Biopython 1.88 are installed under `/opt/covid-tools` on the box and on mail (James, t1227s6218). Smoke tests passed. Nextstrain / Augur was optional and was not installed. See [`TOOLS.md`](../TOOLS.md) and [`tools/VERSIONS.txt`](../tools/VERSIONS.txt). **This protocol has still not been run.**
 
 ## Analysis steps
 
