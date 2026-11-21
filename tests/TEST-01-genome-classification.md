@@ -15,9 +15,9 @@ This protocol was tightened on 21 Nov 2026 after Claude reviews of the first dra
 | 21 Nov 2026 | 15ee1b5 | BLAST settings, one-sided outcomes, tree commands, set rules, A-nested label, citation exception, rerun policy | Claude must-fix M1–M7 | No |
 | 21 Nov 2026 | 4f39c50 | Shorter-molecule coverage; segment concatenation; outgroup BLAST direction; identity-gate script; decision host; on-paper reachability | Claude must-fix remaining M2, N1, N2 | No |
 | 21 Nov 2026 | 61b8bf2 | Organization is reported, not a letter-deciding bullet; IQ-TREE `-o` and UNROOTED clarification; critical-branch bipartitions; reachability wording | Claude must-fix N3, N4 | No |
-| 21 Nov 2026 | this follow-up | Amendment-log hash corrected from a superseded amend (`af8023e`) to `61b8bf2` | Bookkeeping only | No |
+| 21 Nov 2026 | 42f9270 | Amendment-log hash corrected from a superseded amend (`af8023e`) to `61b8bf2` | Bookkeeping only | No |
 | 21 Nov 2026 | 61b8bf2 (addendum) | Also in 61b8bf2, and not listed in the original row: subject intervals are merged within each segment then summed, and shorter-molecule coverage always uses max(covered query, covered subject) bases; `.gitignore` additions for BLAST/IQ-TREE sidecars | Completes the 61b8bf2 log | No |
-| 21 Nov 2026 | this commit | PLAN.md C summary no longer treats organization conflict as a C trigger (TEST-01 governs if the summary and protocol differ); FASTA headers pinned to accession.version; reachability lists the step 6 outgroup gate; A-nested critical branch stated | Claude must-fix N5, plus nits 1–4 | No |
+| 21 Nov 2026 | 8af56f9 | PLAN.md C summary no longer treats organization conflict as a C trigger (TEST-01 governs if the summary and protocol differ); FASTA headers pinned to accession.version; reachability lists the step 6 outgroup gate; A-nested critical branch stated; no disagreement mark when a reference set has no single organization; step 8–9 cross-reference wording | Claude must-fix N5, plus nits | No |
 
 Any later protocol change, including after the first public push but before a run, must be added to this table, with whether any Test 1 inputs had been opened.
 

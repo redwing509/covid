@@ -24,7 +24,7 @@ The first research run, including Test 1 compute, waits until after the usage re
 
 **What would support “groups with the other-coronavirus references”.** Under the same rule, the query sequences meet outcome B or B-blast.
 
-**What would be inconclusive.** Outcome C, as defined in the protocol: support below the stated thresholds, missing records, a failed alignment-quality gate, a missing or unusable outgroup, or a topology that matches neither set. Organization is reported alongside the letter and does not by itself make the result C. If this summary and the protocol ever differ, [`tests/TEST-01-genome-classification.md`](tests/TEST-01-genome-classification.md) governs. Both answers remain open.
+**What would be inconclusive.** Outcome C, as defined in the protocol, including: support below the stated thresholds, missing records, a failed alignment-quality gate, a missing or unusable outgroup, or a topology that matches neither set. Organization is reported alongside the letter and does not by itself make the result C. If this summary and the protocol ever differ, [`tests/TEST-01-genome-classification.md`](tests/TEST-01-genome-classification.md) governs. Both answers remain open.
 
 Later tests may still use the database label SARS-CoV-2 as a search term. They must not treat Test 1 as settled until that write-up is citation-checked.
 
