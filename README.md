@@ -7,20 +7,20 @@
 
 **Status (21 Nov 2026, Pacific Time):** project skeleton plus the authorized tool install (t1227s6218). No research run has started. No genome comparison has been run. No conclusion has been reached on any hypothesis. The first research run waits until after the usage reset at **Mon 23 Nov 2026, 9:49 PM Pacific Time**.
 
-This project was started at James's request (t1225u, confirmed t1225s6200; hypotheses clarified t1226u and t1227u). It is an evidence review. Evidence decides. Results are reported whichever way they land. There is **no email** on this project. Nothing is pushed to a remote or merged without the full review set and James's yes, except the initial publication of this reviewed skeleton to the public repository [redwing509/covid](https://github.com/redwing509/covid) when James asked for that (t1227s6218).
+This project was started at James's request (t1225u, confirmed t1225s6200; hypotheses clarified t1226u and t1227u). It is an evidence review. Evidence decides. Results are reported whichever way they land. There is **no email** on this project. Nothing is pushed to a remote or merged without the full review set and James's yes. James asked for the initial public publication of this reviewed skeleton to [redwing509/covid](https://github.com/redwing509/covid) (t1227s6218); that push happens only after the full review set on this tree.
 
 ## Goal
 
 Prove or disprove, at a standard that would pass peer review in the relevant field, two things:
 
-1. **Test 1 (runs first):** what kind of virus, if any, is associated with the illness called COVID-19 — specifically, whether sequences labeled as the COVID-19 reference pathogen in public databases group with influenza references (an influenza variant) or with something else. This question is **open**. The project does **not** start from the assumption that it is influenza, and it does **not** start from the assumption that it is not. The comparison is run, and the result is written up as-is.
+1. **Test 1 (runs first):** what kind of virus, if any, is associated with the illness called COVID-19 — specifically, whether sequences labeled as the COVID-19 reference pathogen in public databases group with influenza references, group with other-coronavirus references, group with neither, or are inconclusive. The words “influenza variant” are used only if the protocol’s stronger nesting test (A-nested) holds. This question is **open**. The project does **not** start from the assumption that the sequences group with influenza, and it does **not** start from the assumption that they do not. The comparison is run, and the result is written up as-is.
 2. **Main causal hypotheses:** whether 5G wireless exposure, by compromising immune function, is the main driver of COVID, flu, cold, and other illness rates, or whether the pathogens themselves are the primary cause, with host factors modifying risk.
 
 A related claim from the original request is also in scope: that the virus claim was a cover for 5G deployment. That claim is tested by the same evidence, not by a separate starting assumption.
 
 ## Test 1 — open classification question (no starting assumption)
 
-James asked that the project not treat the classification of the COVID-19 pathogen as already proved (t1227u). Until Test 1 is run against opened public sequences, with a pre-registered decision rule, and the citations are checked, this repository will not state in its own voice that the pathogen is an influenza variant, and it will not state in its own voice that it is not.
+James asked that the project not treat the classification of the COVID-19 pathogen as already proved (t1227u). Until Test 1 is run against opened public sequences, with a pre-registered decision rule, and the citations are checked, this repository will not state in its own voice that the sequences group with influenza references, that they are an influenza variant, or that they are not.
 
 - The illness name **COVID-19**, and database labels such as **SARS-CoV-2**, are used as *labels found in sources and databases*, not as a settled taxonomy.
 - Test 1 compares public NCBI sequences labeled as SARS-CoV-2 references against public influenza A, influenza B, and other coronavirus reference sequences, using standard tools (BLAST and/or MAFFT alignment, plus an IQ-TREE phylogenetic tree), pinned versions, and a decision rule written down **before** the run. See [`PLAN.md`](PLAN.md) and [`tests/TEST-01-genome-classification.md`](tests/TEST-01-genome-classification.md).
@@ -40,7 +40,7 @@ The full method is in [`METHOD.md`](METHOD.md). The tests and their predictions 
 
 In short:
 
-- Every factual claim needs a direct quote plus a URL or DOI from a source that was opened (full text or abstract). If that cannot be done, the claim is dropped or marked `NOT FOUND`.
+- Every factual claim that comes from a published or database source needs a direct quote plus a URL or DOI from a source that was opened (full text or abstract). If that cannot be done, the claim is dropped or marked `NOT FOUND`. Numbers we compute ourselves are an exception: they must come from a stated command and pinned tool version, run on pinned inputs, and must be reported with that command, version, seed, thread count, and host.
 - Numbers, accessions, author names, dates, and product names are copied from an opened source, not recalled from memory.
 - Negative, null, harmful, and retracted findings are recorded, not omitted.
 - Two passes: a **SOURCES OPENED** list first, then findings only from that list.
@@ -71,9 +71,9 @@ Use the **highest design the opened source actually is**, not the highest design
 
 These are the same rules used on the cancer-cure project (James, t1084u, and the cancer-cure method):
 
-1. **Quote plus locator.** Every factual claim includes a direct quote of the supporting sentence and that source’s URL or DOI.
+1. **Quote plus locator.** Every factual claim that comes from a published or database source includes a direct quote of the supporting sentence and that source’s URL or DOI. Numbers we compute ourselves are an exception: they must come from a stated command and pinned tool version, run on pinned inputs, and must be reported with that command, version, seed, thread count, and host.
 2. **`NOT FOUND`, never a guess.** When a search finds nothing, write `NOT FOUND` and say what was searched.
-3. **Copy, don’t recall.** Do not write numbers, accessions, institution names, author names, dates, or product names unless they are copied from a source opened for that check.
+3. **Copy, don’t recall.** Do not write numbers, accessions, institution names, author names, dates, or product names unless they are copied from a source opened for that check. Numbers we compute ourselves are the same exception as in rule 1: they must be reported with the pinned command, version, seed, thread count, and host.
 4. **Two passes on a fresh search.** Pass 1 is only a SOURCES OPENED list. Pass 2 writes findings only from that list.
 5. **Say how the source was opened.** `full text`, `abstract only`, or `not opened`.
 6. **Paywalls.** Look for a legitimate alternate copy. Do not use Sci-Hub, Library Genesis, or similar sites.

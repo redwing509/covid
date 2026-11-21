@@ -24,3 +24,11 @@ results/*.aln
 results/*.treefile
 results/*.iqtree
 results/*.log
+
+# Small Test 1 text outputs (run log, IQ-TREE report, treefile, BLAST tables) may be committed.
+# Keep ignoring FASTA/alignments under this folder.
+!results/test-01/
+!results/test-01/**
+results/test-01/*.fasta
+results/test-01/*.fa
+results/test-01/*.aln

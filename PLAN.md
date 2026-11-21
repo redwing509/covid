@@ -6,25 +6,25 @@ This file lists the testable predictions of each claim and how each will be chec
 
 ## Order of work
 
-1. **Test 1 first** — classification of the public sequences labeled as the COVID-19 reference pathogen (influenza variant or not). Open question; no starting assumption. Protocol: [`tests/TEST-01-genome-classification.md`](tests/TEST-01-genome-classification.md).
+1. **Test 1 first** — classification of the public sequences labeled as the COVID-19 reference pathogen (whether they group with influenza references, with other-coronavirus references, with neither, or the comparison is inconclusive). Open question; no starting assumption. Protocol: [`tests/TEST-01-genome-classification.md`](tests/TEST-01-genome-classification.md).
 2. **Pathogen-existence and transmission checks** that H-A needs, and that H-B must also confront (isolation and culture, electron microscopy, household and other transmission studies, animal challenge studies, variant tracking).
 3. **H-B immune-compromise checks** (illness rates versus 5G rollout timing, location, and speed; pre-5G pandemics; places with no 5G; seasonality; controlled RF-exposure immune-marker studies, including nulls; dose-response; SAR at deployed power; any peer-reviewed paper that claims a 5G–COVID or 5G–immune link, including retractions).
 
 The first research run, including Test 1 compute, waits until after the usage reset at **Mon 23 Nov 2026, 9:49 PM Pacific Time**, unless a later note marks a step as tiny enough to do sooner. No Hermes survey is started for this project yet. No email is sent.
 
-## Test 1 — is the COVID-19 pathogen an influenza variant? (open)
+## Test 1 — do the public sequences labeled as the COVID-19 reference pathogen group with influenza references? (open)
 
-**Question.** Public databases contain sequences labeled as the reference pathogen for COVID-19 (commonly labeled SARS-CoV-2). Are those sequences an influenza variant (grouping with influenza A and/or influenza B references), or do they group with something else (including sequences labeled as other coronaviruses), or is the comparison inconclusive?
+**Question.** Public databases contain sequences labeled as the reference pathogen for COVID-19 (commonly labeled SARS-CoV-2). Do those sequences group with influenza A and/or influenza B references, group with sequences labeled as other coronaviruses, group with neither, or is the comparison inconclusive? The words “influenza variant” are used only if the protocol’s A-nested test holds.
 
 **This question is open.** The plan does not assume either answer. James asked that the project not treat the classification as already proved (t1227u). The comparison is run at a peer-review standard, and the result is reported as-is.
 
 **How it will be checked.** A genome comparison of public NCBI records, with versions pinned and a decision rule written before the run. Tools: BLAST and/or MAFFT alignment, plus a phylogenetic tree with IQ-TREE. Full protocol and decision rule: [`tests/TEST-01-genome-classification.md`](tests/TEST-01-genome-classification.md).
 
-**What would support “influenza variant”.** Under the pre-registered rule, the query sequences cluster with the influenza A/B reference set, to the exclusion of the other-coronavirus reference set, with support above the stated threshold, and their recorded genome organization matches the influenza references.
+**What would support “groups with influenza references”.** Under the pre-registered rule in [`tests/TEST-01-genome-classification.md`](tests/TEST-01-genome-classification.md), the query sequences meet outcome A or A-blast (and A-nested only if the stronger nesting test also holds).
 
-**What would support “not an influenza variant”.** Under the same rule, the query sequences cluster with the other-coronavirus reference set, to the exclusion of the influenza A/B set, with support above the stated threshold, and their recorded genome organization matches those other-coronavirus references.
+**What would support “groups with the other-coronavirus references”.** Under the same rule, the query sequences meet outcome B or B-blast.
 
-**What would be inconclusive.** Support below the threshold, conflicting organization versus tree, missing records, or a topology that matches neither set. Both answers remain open.
+**What would be inconclusive.** Outcome C: support below the stated thresholds, conflicting organization versus tree or BLAST, missing records, a failed alignment-quality gate, or a topology that matches neither set. Both answers remain open.
 
 Later tests may still use the database label SARS-CoV-2 as a search term. They must not treat Test 1 as settled until that write-up is citation-checked.
 

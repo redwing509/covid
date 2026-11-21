@@ -1,6 +1,6 @@
 # Rotation note
 
-James asked that Covid be added to the daily research rotation (t1227s6218). The official cadence file is `/workspace/research-rotation/ROTATION.md`. This note is the project-side description of that fit.
+James asked that Covid be added to the daily research rotation (t1227s6218). The official cadence file is kept in the private research-rotation notes (not in this public repository). This note is the project-side description of that fit.
 
 ## Cadence
 

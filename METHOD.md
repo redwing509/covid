@@ -6,7 +6,7 @@ Follow the same citation-honesty rules used on the cancer-cure project and the o
 
 ## Open questions stay open
 
-Until a test in [`PLAN.md`](PLAN.md) has been run (or its published sources opened), the citation check is done, and the result is written from the opened record, do not state that result in our own voice as fact. In particular, **Test 1** — whether the pathogen associated with COVID-19 is an influenza variant or not — is open. Do not assume either answer in notes, code comments, or figure captions.
+Until a test in [`PLAN.md`](PLAN.md) has been run (or its published sources opened), the citation check is done, and the result is written from the opened record, do not state that result in our own voice as fact. In particular, **Test 1** — whether the public sequences labeled as the COVID-19 reference pathogen group with influenza references, with other-coronavirus references, with neither, or are inconclusive — is open. Do not assume either answer in notes, code comments, or figure captions. The words “influenza variant” are used only if the protocol’s A-nested test holds.
 
 Database labels (for example a record titled SARS-CoV-2) are labels to be checked, not a classification finding.
 
@@ -18,9 +18,9 @@ Use the **highest design the opened source actually is**, not the highest design
 
 ## Citation honesty
 
-1. **Quote plus locator.** Every factual claim that comes from a published or database source includes a direct quote of the supporting sentence and that source’s URL or DOI. Drop any such claim that lacks both. Numbers we compute ourselves are an exception: they must come from a stated command and pinned tool version, run on pinned inputs (accessions, dates of download, and file hashes when a file is saved), and must be reported with that command and version, not as if they were quoted from a paper. See “Work we run ourselves” below.
+1. **Quote plus locator.** Every factual claim that comes from a published or database source includes a direct quote of the supporting sentence and that source’s URL or DOI. Drop any such claim that lacks both. Numbers we compute ourselves are an exception: they must come from a stated command and pinned tool version, run on pinned inputs (accessions, dates of download, and file hashes when a file is saved), and must be reported with that command, version, seed, thread count, and host, not as if they were quoted from a paper. See “Work we run ourselves” below.
 2. **`NOT FOUND`, never a guess.** When a search finds nothing, write `NOT FOUND` and say what was searched. Never fill gaps from memory.
-3. **Copy, don’t recall.** Do not write numbers, sequence accessions, institution names, author names, dates, or product or formula names unless they are copied from a source opened for that check.
+3. **Copy, don’t recall.** Do not write numbers, sequence accessions, institution names, author names, dates, or product or formula names unless they are copied from a source opened for that check. Numbers we compute ourselves are the same exception as in rule 1: they must come from a stated command and pinned tool version, run on pinned inputs, and must be reported with that command, version, seed, thread count, and host, not as if they were copied from a paper.
 4. **Two passes on a fresh search.** Pass 1 is only a **SOURCES OPENED** list (URL or DOI, title, one quote, and `full text` / `abstract only` / `not opened`). Pass 2 writes findings only from that list.
 5. **Say how the source was opened.** Never describe, quote, or give numbers from content that was not opened. If only the abstract was opened, quote the abstract and mark the rest unseen.
 6. **Paywalls.** Look for a legitimate alternate copy (author preprint, thesis, university repository, conference slides, or a later open paper that quotes the numbers). Do **not** use Sci-Hub, Library Genesis, or similar sites. If only a paywalled record exists, cite the bibliographic data, label it `not opened` or `abstract only`, and mark unseen numbers as “paywalled; no legitimate open copy found”.
@@ -45,7 +45,7 @@ When a later pull request adds findings, each entry should include:
 For tools listed in [`TOOLS.md`](TOOLS.md):
 
 - Write the protocol and the decision rule **before** the run (see [`tests/TEST-01-genome-classification.md`](tests/TEST-01-genome-classification.md) for Test 1).
-- Pin tool names, versions, and inputs (accessions, dates of download, hashes when a file is saved).
+- Pin tool names, versions, inputs (accessions, dates of download, hashes when a file is saved), and, for any computed result, the command, seed, thread count, and host.
 - Label output as our analysis, not as a published paper, until it is written up and reviewed.
 - Installing a third-party program, downloading a new package, or accepting a license needs a separate OK from James, unless he has already given one for that install.
 - Code that will be pushed must pass the full review set (Claude, the controller, PR-Agent, CodeRabbit CLI, gitleaks, trufflehog, a board note, rb.py, a push-hold bundle, MANIFEST) before it is pushed. Merges need James's yes (t997u).
