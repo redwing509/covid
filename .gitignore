@@ -57,3 +57,14 @@ results/test-01/**/*.ckp.gz
 results/test-01/**/*.model.gz
 results/test-01/**/*.contree
 results/test-01/**/*.splits.nex
+results/test-01/**/*.gz
+results/test-01/**/*.fna.gz
+results/test-01/**/*.fas.gz
+results/test-01/**/*.aln.gz
+results/test-01/**/*.phy
+results/test-01/**/*.nex
+results/test-01/**/.ncbirc
+results/test-01/**/.netrc
+results/test-01/**/*.netrc
+results/test-01/**/credentials*
+results/test-01/**/.ncbirc.*

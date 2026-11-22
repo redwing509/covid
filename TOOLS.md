@@ -10,7 +10,7 @@ Checked on the box and on mail on **21 Nov 2026, Pacific Time**.
 
 ## Summary
 
-The standard Test 1 genome-comparison tools, and the statistics tools for later meta-analysis and regression, are now installed under `/opt/covid-tools` on the box and on mail. Smoke tests passed on both hosts. **Test 1 itself has not been run.** No research genomes were downloaded. The first research run still waits until after the usage reset at Mon 23 Nov 2026, 9:49 PM Pacific Time.
+The standard Test 1 genome-comparison tools, and the statistics tools for later meta-analysis and regression, are now installed under `/opt/covid-tools` on the box and on mail. Smoke tests passed on both hosts. James t1251u lifted the reset hold (first Covid run requested t1252u / t1253u). Test 1 was afterwards run on the box; the write-up is [`results/test-01/TEST-01-RESULT.md`](results/test-01/TEST-01-RESULT.md).
 
 Other project needs remain: a Test 1 wrapper script, a sequence-snapshot script, the ecological time-series script, the photon-energy calculator, and SAR work that reuses the cancer project's tools. Meep is still not installed on the box.
 
@@ -38,7 +38,7 @@ A login-shell snippet was also added at `/etc/profile.d/covid-tools.sh` on both 
   - BLAST+: constructed 60-nt query against a two-sequence local database; exact self-hit, 100% identity, length 60. PASS on box and mail.
   - MAFFT: four constructed nucleotide sequences; one alignment of length 60. PASS on box and mail.
   - IQ-TREE: official bundled `example.phy` (17 sequences, 1998 nucleotide sites) with `-m HKY`; report and treefile written; best score **-23117.030**. PASS on box and mail. Both hosts printed a non-fatal `libarcher.so: cannot open shared object file` message; the run still finished.
-- **Plan:** Add a small MIT-licensed wrapper under `tools/` that downloads only pinned accessions, runs the protocol in [`tests/TEST-01-genome-classification.md`](tests/TEST-01-genome-classification.md), and writes a machine-readable summary. **Do not run Test 1 until after the usage reset.**
+- **Plan:** A small MIT-licensed runner now lives at [`tools/test01_run.py`](tools/test01_run.py), with the pinned identity-gate script at [`tools/test01_mean_pairwise_identity.py`](tools/test01_mean_pairwise_identity.py). The first Test 1 decision run used that runner on the box.
 
 ### 2. Public sequence snapshot (NCBI; GISAID if a legitimate open view exists)
 
@@ -103,7 +103,7 @@ A login-shell snippet was also added at `/etc/profile.d/covid-tools.sh` on both 
 
 ## Build order
 
-1. Test 1 wrapper (highest priority; Test 1 runs first, after the usage reset).
+1. Test 1 wrapper (highest priority; Test 1 runs first; the reset hold was lifted by James t1251u).
 2. Ecological time-series script (core H-B test).
 3. Photon-energy calculator (small).
 4. Analytic SAR reuse, then Meep only if needed.
