@@ -95,11 +95,14 @@ def run(cmd, cwd, log_fh, extra_env=None):
     env = os.environ.copy()
     if extra_env:
         env.update(extra_env)
-    log_fh.write("$ " + " ".join(cmd) + f"\n# cwd={cwd}\n")
+    # Apply nice 19 once. Some callers already prefix the argv with nice;
+    # do not double-prefix. Log the argv that is actually executed.
+    if cmd and cmd[0] == "nice":
+        full = list(cmd)
+    else:
+        full = ["nice", "-n", "19", *cmd]
+    log_fh.write("$ " + " ".join(full) + f"\n# cwd={cwd}\n")
     log_fh.flush()
-    # Compute steps: nice 19 is applied by the caller wrapping this script,
-    # and again here for child processes.
-    full = ["nice", "-n", "19", *cmd]
     proc = subprocess.run(
         full,
         cwd=str(cwd),
@@ -157,37 +160,69 @@ def parse_blast_tsv(path: Path):
     return rows
 
 
+def resolve_subject(row, accessions):
+    """Map BLAST sacc/sseqid onto a pinned accession.version.
+
+    BLAST -outfmt sacc omits the version when -parse_seqids is used;
+    sseqid still carries ref|ACCESSION.VERSION|. Unique base-accession
+    match, or a unique accession.version found in sseqid. Ambiguous
+    matches return None. This is a parser fix, not a change to the
+    pinned blastn command or the decision rule.
+    """
+    sacc = row.get("sacc") or ""
+    sseqid = row.get("sseqid") or ""
+    accs = list(accessions)
+    if sacc in accs:
+        return sacc
+    base_hits = [acc for acc in accs if acc == sacc or acc.startswith(sacc + ".")]
+    if len(base_hits) == 1:
+        return base_hits[0]
+    exact_in_sseqid = [acc for acc in accs if acc in sseqid]
+    if len(base_hits) > 1:
+        return exact_in_sseqid[0] if len(exact_in_sseqid) == 1 else None
+    if len(exact_in_sseqid) == 1:
+        return exact_in_sseqid[0]
+    return None
+
+
+def resolve_blast_table(rows, accessions):
+    """Rewrite each row's sacc to the pinned accession.version when it resolves.
+
+    Unresolved rows keep their raw sacc and set sacc_resolved to None.
+    The original BLAST token is preserved as sacc_raw.
+    """
+    out = []
+    for r in rows:
+        r2 = dict(r)
+        r2["sacc_raw"] = r.get("sacc")
+        acc = resolve_subject(r, accessions)
+        r2["sacc_resolved"] = acc
+        if acc is not None:
+            r2["sacc"] = acc
+        out.append(r2)
+    return out
+
+
+def genome_accessions(genomes):
+    accs = []
+    for g in genomes:
+        for s in g["segs"]:
+            accs.append(s["accession"])
+    return accs
+
+
 def genome_hit(query_acc, rows, genome, ev_cutoff=PROTOCOL_EVALUE):
     """Qualifying hit of one query record against one reference genome (step 5)."""
     # Map accession -> segment and slen
     acc_to_seg = {s["accession"]: s for s in genome["segs"]}
-    # BLAST -outfmt sacc returns the accession without the version when
-    # -parse_seqids is used; sseqid still carries ref|ACCESSION.VERSION|.
-    # Map both forms onto the pinned accession.version. This is a parser
-    # fix, not a change to the pinned blastn command or the decision rule.
-    def resolve_subject(row):
-        sacc = row["sacc"]
-        sseqid = row["sseqid"]
-        if sacc in acc_to_seg:
-            return sacc
-        for acc in acc_to_seg:
-            if sacc == acc.split(".")[0] and (f"{sacc}." in acc or acc.startswith(sacc)):
-                return acc
-            if acc in sseqid or acc.split(".")[0] in sseqid.split("|"):
-                # prefer an exact version match in sseqid
-                if acc in sseqid:
-                    return acc
-        # second pass: unique accession-without-version match
-        hits = [acc for acc in acc_to_seg if sacc == acc.split(".")[0]]
-        if len(hits) == 1:
-            return hits[0]
-        return None
     hsps = []
     for r in rows:
         if r["evalue"] > ev_cutoff:
             continue
-        acc = resolve_subject(r)
-        if acc is None:
+        acc = r.get("sacc_resolved")
+        if not acc:
+            acc = resolve_subject(r, acc_to_seg)
+        if acc is None or acc not in acc_to_seg:
             continue
         r = dict(r)
         r["sacc_resolved"] = acc
@@ -272,16 +307,37 @@ def best_of_set(hits):
     return tops, len(tops) > 1
 
 
-def main():
-    root = Path("/workspace/covid")
+def repo_root() -> Path:
+    return Path(__file__).resolve().parents[1]
+
+
+def main(argv=None):
+    argv = list(sys.argv[1:] if argv is None else argv)
+    root = Path(os.environ.get("TEST01_ROOT", repo_root()))
+    if len(argv) >= 2:
+        root = Path(argv[1])
     raw = root / "data/raw/test-01"
     results = root / "results/test-01"
     work = raw / "work"
     work.mkdir(parents=True, exist_ok=True)
-    manifest_path = Path("/tmp/test01-selection.json")
+    manifest_path = Path(
+        os.environ.get("TEST01_SELECTION", results / "selection.json")
+    )
+    if len(argv) >= 1:
+        manifest_path = Path(argv[0])
     sel = json.loads(manifest_path.read_text())
     # outgroup may have been updated in that file
     query_acc = sel["query"]
+    # This runner implements the one-record, unsegmented-Q path used by Test 1.
+    # Segmented or multi-record Q needs the protocol's per-segment aggregation
+    # and C-mixed logic, which are not implemented here. Refuse those cases.
+    if not isinstance(query_acc, str) or not query_acc.strip():
+        raise SystemExit("Q must be a single accession.version string.")
+    if sel.get("query_segs") or isinstance(sel.get("query"), list):
+        raise SystemExit(
+            "This runner does not implement segmented or multi-record Q "
+            "(per-segment aggregation / C-mixed). Refusing to continue."
+        )
     outgroup_acc = sel["outgroup"]
     flu_genomes = sel["flu_a"] + sel["flu_b"]
     cov_accs = list(sel["cov"].values())
@@ -386,7 +442,14 @@ def main():
             cwd=work,
             log_fh=log_fh,
         )
-        blast_tables[name] = parse_blast_tsv(out)
+        raw_rows = parse_blast_tsv(out)
+        if name == "S_flu":
+            accs = genome_accessions(flu_genomes)
+        elif name == "S_cov":
+            accs = genome_accessions(cov_genomes)
+        else:
+            accs = genome_accessions([outgroup_genome])
+        blast_tables[name] = resolve_blast_table(raw_rows, accs)
 
     # If sacc is empty/weird because of parse_seqids, fall back is not allowed;
     # report what we got.
@@ -404,6 +467,12 @@ def main():
     summary["outgroup_hits"].append(
         genome_hit(query_acc, blast_tables["outgroup"], outgroup_genome)
     )
+
+    qlen_fa = len(seqs[query_acc])
+    for group in ("S_flu_hits", "S_cov_hits", "outgroup_hits"):
+        for h in summary[group]:
+            if h.get("Qlen") is None:
+                h["Qlen"] = qlen_fa
 
     flu_best, flu_tie = best_of_set(summary["S_flu_hits"])
     cov_best, cov_tie = best_of_set(summary["S_cov_hits"])
@@ -525,15 +594,9 @@ def run_combined(
                 keep[r["sacc"]].append((a, b))
 
     def genome_trimmed(genome):
-        parts = []
-        kept_bases = 0
-        for s in genome["segs"]:
-            acc = s["accession"]
-            frag = extract_trimmed(seqs[acc], keep.get(acc, []))
-            kept_bases += len(frag.replace("N", ""))  # N spacers not counted as kept bases
-            # Protocol: "zero kept bases" — spacers are inserted between kept intervals,
-            # so kept bases are the nucleotides from the intervals themselves.
-            # Recompute strictly from intervals.
+        # Kept bases are the nucleotides in the merged BLAST intervals, not
+        # counting the ten-N spacers inserted between disjoint intervals or
+        # between segments.
         kept_strict = 0
         segs_out = []
         for s in genome["segs"]:
@@ -888,8 +951,11 @@ def apply_tree_rule(
     cov_score, _ = best_score(cov_best, cov_tie)
     notes.append(f"Best qualifying bitscores: S_flu={flu_score} (tied={flu_tie}), S_cov={cov_score} (tied={cov_tie}).")
 
-    a_bits = flu_score is not None and cov_score is not None and (not flu_tie) and flu_score > cov_score
-    b_bits = flu_score is not None and cov_score is not None and (not cov_tie) and cov_score > flu_score
+    # The rule compares each query's best S_flu bitscore with its best S_cov
+    # bitscore. A tie among genomes inside one set is reported and is not
+    # broken by judgment, but it does not block a strict cross-set comparison.
+    a_bits = flu_score is not None and cov_score is not None and flu_score > cov_score
+    b_bits = flu_score is not None and cov_score is not None and cov_score > flu_score
     if flu_score is not None and cov_score is not None and flu_score == cov_score:
         notes.append("Best qualifying bitscores are tied.")
 

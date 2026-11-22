@@ -27,6 +27,15 @@ Accessions, titles, lengths, and hashes are copied from the opened official NCBI
 - **S_cov:** NC_002645.1 (HCoV-229E), NC_005831.2 (HCoV-NL63), NC_006213.1 (HCoV-OC43), NC_006577.2 (HCoV-HKU1), NC_004718.3 (SARS-CoV, official organism name “SARS coronavirus Tor2”, report release_date 2003-04-14), NC_019843.3 (MERS-CoV).
 - **Outgroup:** NC_140766.1, title “Bat paramyxovirus, complete genome”, 18095 bp, first listed Paramyxoviridae RefSeq complete genome on the official catalog whose own record title states “complete genome” (type species was `NOT FOUND` on the official family taxonomy record; the catalog’s first row, NC_140767.1, is titled “partial genome” and was not used).
 
+### Pass-1 interpretations
+
+These are the Pass-1 readings used to apply the written selection rules. They are also recorded in [`SOURCES-OPENED.md`](SOURCES-OPENED.md).
+
+- The official Influenza Virus Resource HTML page redirected to an NCBI Virus JavaScript shell and did not yield a usable accession list. The official NCBI Datasets v2 virus `dataset_report` with `filter.refseq_only=true` was used as the official RefSeq influenza reference list, and “listed order” is that report’s return order. The protocol’s fallback order is RefSeq list, then the Influenza Virus Resource; the Datasets RefSeq-only report is a documented official API for that RefSeq list.
+- For the Paramyxoviridae outgroup, the catalog’s first row was marked COMPLETE on the report but titled “partial genome” and was not used. The first listed record whose own title states “complete genome” (NC_140766.1) was taken, after type species was `NOT FOUND`.
+
+The selection actually used is also committed at [`selection.json`](selection.json) (accessions, labels, and lengths only; no sequence residues).
+
 ## Organization (reported with the letter; does not change it)
 
 Copied from the opened records, using only the pre-registered segment-count comparison:
@@ -110,3 +119,6 @@ This letter is not a statement about patient illness, isolation, transmission, o
 
 Both “groups with influenza references” by a tree criterion, and a stronger nesting claim, remain untested by a combined tree in this run, because the pre-registered one-sided BLAST rule stopped at B-blast.
 
+## Post-run runner fix
+
+After this letter was written, a review found a latent bug in the combined-tree path of `tools/test01_run.py` (unversioned BLAST `sacc` in the site-homology trim). This run did not take that path. The runner was fixed afterwards; an offline re-parse of the committed BLAST tables still yields **B-blast** with the same coverage numbers. The decision rule was not changed.

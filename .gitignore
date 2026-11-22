@@ -68,3 +68,10 @@ results/test-01/**/.netrc
 results/test-01/**/*.netrc
 results/test-01/**/credentials*
 results/test-01/**/.ncbirc.*
+results/test-01/**/*.gb
+results/test-01/**/*.gbk
+results/test-01/**/*.genbank
+results/test-01/**/*.gbff
+results/test-01/**/*.nhd
+results/test-01/**/*.nhi
+results/test-01/**/*.nal

@@ -6,9 +6,9 @@
 
 Follow [`METHOD.md`](../METHOD.md). Results will be reported as-is.
 
-This protocol was tightened on 21 Nov 2026 after Claude reviews of the first draft, **before any research run and before the first public push**. The changes close holes in the decision rule. They are not a result. No research genomes have been opened.
+This protocol was tightened on 21 Nov 2026 after Claude reviews of the first draft, **before any research run and before the first public push**. The changes close holes in the decision rule. They are not a result. At the time of those pre-registration amendments, no research genomes had been opened. Genomes were later opened for the Test 1 run recorded above.
 
-### Amendment log (all entries pre-data)
+### Amendment log
 
 | Date (Pacific Time) | Commit | What changed | Why | Data opened? |
 |---|---|---|---|---|
@@ -24,7 +24,16 @@ This protocol was tightened on 21 Nov 2026 after Claude reviews of the first dra
 | 21 Nov 2026, evening | 42b5a19 | `.gitignore` re-ignores additional compressed sequence names and common credential filenames under `results/test-01/**`. The decision rule is unchanged. | Residual Claude r6 nit N-2 (extra gitignore names) | No |
 | 21 Nov 2026, evening | 42b5a19 | PLAN.md Test 1 C summary now names the step 8 site-homology trim (C-homology). The protocol still governs if the summary and protocol differ. The decision rule is unchanged. | Residual Claude r6 nit N-4 (PLAN wording) | No |
 
-Any later protocol change, including after the first public push but before a run, must be added to this table, with whether any Test 1 inputs had been opened.
+The four 42b5a19 rows above were written to the working tree before any Test 1 input was opened, and they do not change the decision rule. They were committed in the same revision as the Test 1 outputs (`42b5a19`). Git cannot confirm that on-disk order; their pre-data status rests on `results/test-01/run-logs/RUN-LOG.md` and `results/test-01/SOURCES-OPENED.md`.
+
+Any later protocol change, including after the first public push but before a run, or a post-run wording or runner change, must be added to this table, with whether any Test 1 inputs had been opened.
+
+#### Post-data amendments (wording and runner only; decision rule unchanged)
+
+| Date (Pacific Time) | Commit | What changed | Why | Data opened? |
+|---|---|---|---|---|
+| 21 Nov 2026, late evening | TBD | Historical “no genomes opened” / “protocol has still not been run” sentences marked as pre-run wording. Limitation paragraph indented under step 8. `.gitignore` re-ignores GenBank flat files and extra BLAST db names under `results/test-01/**`. The decision rule, thresholds, and commands are unchanged. | Claude Test 1 review should-fix S1, S3, S4 and a list-numbering nit | Yes (Test 1 already run; letter B-blast unchanged) |
+| 21 Nov 2026, late evening | TBD | Runner: resolve BLAST `sacc` onto pinned `accession.version` once after parsing, and use that in both the qualifying-hit step and the site-homology trim; commit the selection manifest; refuse segmented or multi-record Q; compare best-of-set bitscores across sets even when two genomes inside one set tie. The decision rule is unchanged. This run did not take the combined-tree path, so the letter is unchanged. | Claude Test 1 review must-fix M1 and should-fix S5–S7; S6 applies the written cross-set bitscore comparison | Yes (Test 1 already run; letter B-blast unchanged) |
 
 ## Question
 
@@ -57,7 +66,7 @@ For each record store: accession, version, title as shown, download date and tim
 
 Intended standard tools (peer-review practice in viral genomics), with the commands pinned below. Pin the exact package version strings in the run log before looking at the tree.
 
-**What we have today (21 Nov 2026, Pacific Time, checked on the box and on mail):** NCBI BLAST+ 2.17.0, MAFFT 7.526, IQ-TREE 3.1.4, and Biopython 1.88 are installed under `/opt/covid-tools` on the box and on mail (James, t1227s6218). Smoke tests passed. Nextstrain / Augur was optional and was not installed. See [`TOOLS.md`](../TOOLS.md) and [`tools/VERSIONS.txt`](../tools/VERSIONS.txt). **This protocol has still not been run.**
+**What we have today (21 Nov 2026, Pacific Time, checked on the box and on mail):** NCBI BLAST+ 2.17.0, MAFFT 7.526, IQ-TREE 3.1.4, and Biopython 1.88 are installed under `/opt/covid-tools` on the box and on mail (James, t1227s6218). Smoke tests passed. Nextstrain / Augur was optional and was not installed. See [`TOOLS.md`](../TOOLS.md) and [`tools/VERSIONS.txt`](../tools/VERSIONS.txt). That sentence was written before the first run. The first run is the B-blast result linked in the Status line.
 
 A wrapper script, once written, will live under `tools/` in this repository, MIT-licensed, and will not be pushed until it passes the full review set.
 
@@ -153,7 +162,7 @@ The support thresholds are fixed: **UFBoot ≥ 95** and **SH-aLRT ≥ 80** on th
    - If a query has a qualifying hit in **neither** set, apply **C**. Do not force a combined tree.
 8. If step 7 allows a combined alignment, first write each segmented genome as **one sequence** so that segmented and unsegmented records can be placed in the same alignment: concatenate that genome’s segments in **increasing segment number** as stated on the opened records; if no segment number is stated, concatenate in the order the records appear on the opened genome page. Insert a spacer of **ten `N` characters** between segments. Do not reverse-complement a segment unless the opened record itself states that the deposited orientation is the opposite of the virus’s plus-strand, and then quote that statement. After concatenation, treat the genome as a single sequence for MAFFT. Before MAFFT, rewrite every FASTA header to exactly the record’s `accession.version` as copied from the opened page. For a concatenated segmented genome, use the first segment’s `accession.version` (the first in the concatenation order above). That same string is the `OUTGROUP_ACCESSION` passed to IQ-TREE `-o` when the sequence is the outgroup. **Site-homology trim, before MAFFT.** A qualifying genome-level hit does not, by itself, mean every position in every full genome is homologous. For the combined alignment, restrict each genome to intervals supported by the step 4 `blastn` tables, using every HSP with `evalue ≤ 1e-5` between that genome and any Q record: query intervals (`qstart`–`qend`) when the genome is a Q record, and subject intervals (`sstart`–`send`, taken as a positive interval if the HSP is on the opposite strand) when the genome is an S_flu, S_cov, or outgroup record. Merge overlapping intervals within each segment. Write the trimmed sequence in the existing segment order, inserting a spacer of **ten `N` characters** between disjoint kept intervals on the same segment and between segments as already specified. If any required genome (every Q record, every selected S_flu and S_cov genome, and the outgroup) has zero kept bases, do not run MAFFT or IQ-TREE; apply **C** for the tree decision (sub-code **C-homology**). A-blast and B-blast, which do not use the tree, are unchanged if they already held. No additional BLAST searches are required beyond step 4. Then build the alignment of these trimmed sequences with the pinned MAFFT command, apply the column filter, and apply the 200-column / 30% identity gate using the pinned script. If the gate fails, state that in the run log, do not force a tree, and apply **C** (unless A-blast or B-blast already applies from a one-sided BLAST result; a failed combined tree does not cancel a one-sided BLAST outcome that already held). Molecule type is still recorded and reported in step 3; concatenation is only a representation rule for segmented records, not a claim that the organizations are the same.
 
-**Limitation (site-homology trim; logged before any Test 1 input was opened).** The trim keeps, for each genome, the union of intervals supported by step 4 `blastn` HSPs between that genome and any Q record (and, for a Q record, intervals against S_flu, S_cov, and the outgroup). It does not require that every kept column is homologous across all taxa, and it adds no minimum kept length beyond the existing zero-base **C-homology** rule. After the trim, positional homology is handled only by the gap-fraction column filter and the 200-column / 30% identity gate in the pinned commands. This is a stated limitation, not a change to the decision rule.
+   **Limitation (site-homology trim; logged before any Test 1 input was opened).** The trim keeps, for each genome, the union of intervals supported by step 4 `blastn` HSPs between that genome and any Q record (and, for a Q record, intervals against S_flu, S_cov, and the outgroup). It does not require that every kept column is homologous across all taxa, and it adds no minimum kept length beyond the existing zero-base **C-homology** rule. After the trim, positional homology is handled only by the gap-fraction column filter and the 200-column / 30% identity gate in the pinned commands. This is a stated limitation, not a change to the decision rule.
 9. If the filtered alignment passed the gate, run the pinned IQ-TREE command. Root the tree on the outgroup as stated above. Save the command line, the `.iqtree` report, the treefile, and the run log, and record whether the report labels the tree as rooted (informational only; see **Rooting**).
 10. Apply the decision rule below. Do not change the rule after seeing the tree or the BLAST table.
 

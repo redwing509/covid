@@ -12,7 +12,7 @@ Checked on the box and on mail on **21 Nov 2026, Pacific Time**.
 
 The standard Test 1 genome-comparison tools, and the statistics tools for later meta-analysis and regression, are now installed under `/opt/covid-tools` on the box and on mail. Smoke tests passed on both hosts. James t1251u lifted the reset hold (first Covid run requested t1252u / t1253u). Test 1 was afterwards run on the box; the write-up is [`results/test-01/TEST-01-RESULT.md`](results/test-01/TEST-01-RESULT.md).
 
-Other project needs remain: a Test 1 wrapper script, a sequence-snapshot script, the ecological time-series script, the photon-energy calculator, and SAR work that reuses the cancer project's tools. Meep is still not installed on the box.
+Other project needs remain: a sequence-snapshot script, the ecological time-series script, the photon-energy calculator, and SAR work that reuses the cancer project's tools. Meep is still not installed on the box.
 
 ## How to use the installed tools
 
@@ -103,7 +103,7 @@ A login-shell snippet was also added at `/etc/profile.d/covid-tools.sh` on both 
 
 ## Build order
 
-1. Test 1 wrapper (highest priority; Test 1 runs first; the reset hold was lifted by James t1251u).
+1. Test 1 runner at [`tools/test01_run.py`](tools/test01_run.py) (used for the first run; post-run review fix for the combined-tree path logged in the Test 1 run log).
 2. Ecological time-series script (core H-B test).
 3. Photon-energy calculator (small).
 4. Analytic SAR reuse, then Meep only if needed.
