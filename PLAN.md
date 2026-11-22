@@ -8,8 +8,8 @@ This file lists the testable predictions of each claim and how each will be chec
 
 | Date (Pacific Time) | Commit | What changed | Why | Data opened? |
 |---|---|---|---|---|
-| 21 Nov 2026, evening | pending | Lifted the plan text that had deferred the first research run, including Test 1 compute, until after the Mon 23 Nov 2026, 9:49 PM Pacific Time usage reset. Test 1 may now be started under the already pre-registered protocol. The decision rule is unchanged. | James t1251u lifted the hold; t1252u / t1253u asked for one Covid run, which is Test 1 | No |
-| 21 Nov 2026, evening | pending | In the Test 1 “What would be inconclusive” summary, named the step 8 site-homology trim (C-homology) among the examples. [`tests/TEST-01-genome-classification.md`](tests/TEST-01-genome-classification.md) still governs if this summary and the protocol differ. The decision rule is unchanged. | Residual CodeRabbit / Claude r6 nit (PLAN wording, Claude r6 N-4) | No |
+| 21 Nov 2026, evening | 42b5a19 | Lifted the plan text that had deferred the first research run, including Test 1 compute, until after the Mon 23 Nov 2026, 9:49 PM Pacific Time usage reset. Test 1 may now be started under the already pre-registered protocol. The decision rule is unchanged. | James t1251u lifted the hold; t1252u / t1253u asked for one Covid run, which is Test 1 | No |
+| 21 Nov 2026, evening | 42b5a19 | In the Test 1 “What would be inconclusive” summary, named the step 8 site-homology trim (C-homology) among the examples. [`tests/TEST-01-genome-classification.md`](tests/TEST-01-genome-classification.md) still governs if this summary and the protocol differ. The decision rule is unchanged. | Residual CodeRabbit / Claude r6 nit (PLAN wording, Claude r6 N-4) | No |
 
 ## Order of work
 
