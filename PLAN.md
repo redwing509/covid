@@ -1,8 +1,18 @@
 # Plan
 
-**Status (21 Nov 2026, Pacific Time):** plan and pre-registered Test 1 decision rule, plus the authorized tool install (t1227s6218). No sources for findings have been opened in this repository yet. No Test 1 run has been started. Smoke tests of the installed tools used only constructed sequences and the IQ-TREE bundled example, not research genomes. No hypothesis has been accepted or rejected.
+**Status (21 Nov 2026, Pacific Time, 11:27 PM):** plan and pre-registered Test 1 decision rule, plus the authorized tool install (t1227s6218). James t1251u (confirmed for a first run by t1252u / t1253u) lifted the reset hold. Test 1 has now been run on the decision host; the pre-registered letter is **B-blast**, written up in [`results/test-01/TEST-01-RESULT.md`](results/test-01/TEST-01-RESULT.md). H-A and H-B have not been tested. No causal hypothesis has been accepted or rejected.
 
 This file lists the testable predictions of each claim and how each will be checked. Methods and citation rules are in [`METHOD.md`](METHOD.md). Programs are in [`TOOLS.md`](TOOLS.md).
+
+### Amendment log
+
+| Date (Pacific Time) | Commit | What changed | Why | Data opened? |
+|---|---|---|---|---|
+| 21 Nov 2026, evening | 42b5a19 | Lifted the plan text that had deferred the first research run, including Test 1 compute, until after the Mon 23 Nov 2026, 9:49 PM Pacific Time usage reset. Test 1 may now be started under the already pre-registered protocol. The decision rule is unchanged. | James t1251u lifted the hold; t1252u / t1253u asked for one Covid run, which is Test 1 | No |
+| 21 Nov 2026, evening | 42b5a19 | In the Test 1 “What would be inconclusive” summary, named the step 8 site-homology trim (C-homology) among the examples. [`tests/TEST-01-genome-classification.md`](tests/TEST-01-genome-classification.md) still governs if this summary and the protocol differ. The decision rule is unchanged. | Residual CodeRabbit / Claude r6 nit (PLAN wording, Claude r6 N-4) | No |
+| 21 Nov 2026, late evening | 1653a1b | Logged that the 42b5a19 plan rows were committed in the same revision as the Test 1 outputs, and that their pre-data status rests on the run log. Noted the post-run runner fix (Claude M1) that does not change the letter. The decision rule is unchanged. | Claude Test 1 review S3, plus the M1 runner fix | Yes (Test 1 already run; letter B-blast unchanged) |
+
+The 42b5a19 rows above were written to the working tree before any Test 1 input was opened. They were committed in the same revision as the Test 1 outputs (`42b5a19`). Git cannot confirm that on-disk order; their pre-data status rests on the Test 1 run log.
 
 ## Order of work
 
@@ -10,7 +20,7 @@ This file lists the testable predictions of each claim and how each will be chec
 2. **Pathogen-existence and transmission checks** that H-A needs, and that H-B must also confront (isolation and culture, electron microscopy, household and other transmission studies, animal challenge studies, variant tracking).
 3. **H-B immune-compromise checks** (illness rates versus 5G rollout timing, location, and speed; pre-5G pandemics; places with no 5G; seasonality; controlled RF-exposure immune-marker studies, including nulls; dose-response; SAR at deployed power; any peer-reviewed paper that claims a 5G–COVID or 5G–immune link, including retractions).
 
-The first research run, including Test 1 compute, waits until after the usage reset at **Mon 23 Nov 2026, 9:49 PM Pacific Time**, unless a later note marks a step as tiny enough to do sooner. No Hermes survey is started for this project yet. No email is sent.
+The reset hold was lifted by James t1251u (first Covid run requested t1252u / t1253u). Test 1 was run on the decision host on 21 Nov 2026, evening Pacific Time. The pre-registered letter is **B-blast**; see [`results/test-01/TEST-01-RESULT.md`](results/test-01/TEST-01-RESULT.md). No Hermes survey is started for this project yet. No email is sent.
 
 ## Test 1 — do the public sequences labeled as the COVID-19 reference pathogen group with influenza references? (open)
 
@@ -24,7 +34,7 @@ The first research run, including Test 1 compute, waits until after the usage re
 
 **What would support “groups with the other-coronavirus references”.** Under the same rule, the query sequences meet outcome B or B-blast.
 
-**What would be inconclusive.** Outcome C, as defined in the protocol, including: support below the stated thresholds, missing records, a failed alignment-quality gate, a missing or unusable outgroup, or a topology that matches neither set. Organization is reported alongside the letter and does not by itself make the result C. If this summary and the protocol ever differ, [`tests/TEST-01-genome-classification.md`](tests/TEST-01-genome-classification.md) governs. Both answers remain open.
+**What would be inconclusive.** Outcome C, as defined in the protocol, including: support below the stated thresholds, missing records, a failed alignment-quality gate, a failed step 8 site-homology trim (C-homology), a missing or unusable outgroup, or a topology that matches neither set. Organization is reported alongside the letter and does not by itself make the result C. If this summary and the protocol ever differ, [`tests/TEST-01-genome-classification.md`](tests/TEST-01-genome-classification.md) governs. Both answers remain open.
 
 Later tests may still use the database label SARS-CoV-2 as a search term. They must not treat Test 1 as settled until that write-up is citation-checked.
 
@@ -71,7 +81,7 @@ The original request also asked whether the virus claim was a cover for 5G deplo
 
 ## What will not be done yet
 
-- No Test 1 run, no heavy compute, and no Hermes literature survey until after the usage reset, except a step later marked as tiny.
+- The reset hold was lifted by James t1251u (first Covid run requested t1252u / t1253u). Test 1 has been run (letter B-blast). No Hermes literature survey is started yet.
 - The BLAST+, MAFFT, IQ-TREE, R/metafor, and Python statistics install is done (t1227s6218; see [`TOOLS.md`](TOOLS.md)). Further new packages still need a separate OK. No installs on rig1 or the laptop.
 - No email.
 

@@ -1,0 +1,743 @@
+{
+  "flu_a": [
+    {
+      "org": "Influenza A virus (A/California/07/2009(H1N1))",
+      "subtype": "H1N1",
+      "first": 1,
+      "isos": [
+        "A/California/07/2009"
+      ],
+      "segs": [
+        {
+          "segment": 1,
+          "accession": "NC_026438.1",
+          "length": 2280,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/California/07/2009",
+          "release": "2015-02-23T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 2,
+          "accession": "NC_026435.1",
+          "length": 2274,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/California/07/2009",
+          "release": "2015-02-23T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 3,
+          "accession": "NC_026437.1",
+          "length": 2151,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/California/07/2009",
+          "release": "2015-02-23T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 4,
+          "accession": "NC_026433.1",
+          "length": 1701,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/California/07/2009",
+          "release": "2015-02-23T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 5,
+          "accession": "NC_026436.1",
+          "length": 1497,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/California/07/2009",
+          "release": "2015-02-23T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 6,
+          "accession": "NC_026434.1",
+          "length": 1410,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/California/07/2009",
+          "release": "2015-02-23T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 7,
+          "accession": "NC_026431.1",
+          "length": 982,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/California/07/2009",
+          "release": "2015-02-23T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 8,
+          "accession": "NC_026432.1",
+          "length": 863,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/California/07/2009",
+          "release": "2015-02-23T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "org": "Influenza A virus (A/Shanghai/02/2013(H7N9))",
+      "subtype": "H7N9",
+      "first": 9,
+      "isos": [
+        "A/Shanghai/02/2013"
+      ],
+      "segs": [
+        {
+          "segment": 1,
+          "accession": "NC_026422.1",
+          "length": 2280,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Shanghai/02/2013",
+          "release": "2015-02-04T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 2,
+          "accession": "NC_026423.1",
+          "length": 2297,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Shanghai/02/2013",
+          "release": "2015-02-04T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 3,
+          "accession": "NC_026424.1",
+          "length": 2176,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Shanghai/02/2013",
+          "release": "2015-02-04T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 4,
+          "accession": "NC_026425.1",
+          "length": 1708,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Shanghai/02/2013",
+          "release": "2015-02-04T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 5,
+          "accession": "NC_026426.1",
+          "length": 1506,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Shanghai/02/2013",
+          "release": "2015-02-04T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 6,
+          "accession": "NC_026429.1",
+          "length": 1398,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Shanghai/02/2013",
+          "release": "2015-02-04T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 7,
+          "accession": "NC_026427.1",
+          "length": 985,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Shanghai/02/2013",
+          "release": "2015-02-04T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 8,
+          "accession": "NC_026428.1",
+          "length": 841,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Shanghai/02/2013",
+          "release": "2015-02-04T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "org": "Influenza A virus (A/Korea/426/1968(H2N2))",
+      "subtype": "H2N2",
+      "first": 17,
+      "isos": [
+        "A/Korea/426/1968"
+      ],
+      "segs": [
+        {
+          "segment": 1,
+          "accession": "NC_007378.1",
+          "length": 2341,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Korea/426/1968",
+          "release": "2005-08-30T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 2,
+          "accession": "NC_007375.1",
+          "length": 2341,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Korea/426/1968",
+          "release": "2005-08-30T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 3,
+          "accession": "NC_007376.1",
+          "length": 2233,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Korea/426/1968",
+          "release": "2005-08-30T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 4,
+          "accession": "NC_007374.1",
+          "length": 1773,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Korea/426/1968",
+          "release": "2005-08-30T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 5,
+          "accession": "NC_007381.1",
+          "length": 1497,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Korea/426/1968",
+          "release": "2005-08-30T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 6,
+          "accession": "NC_007382.1",
+          "length": 1410,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Korea/426/1968",
+          "release": "2005-08-30T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 7,
+          "accession": "NC_007377.1",
+          "length": 1027,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Korea/426/1968",
+          "release": "2005-08-30T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 8,
+          "accession": "NC_007380.1",
+          "length": 838,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Korea/426/1968",
+          "release": "2005-08-30T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "org": "Influenza A virus (A/New York/392/2004(H3N2))",
+      "subtype": "H3N2",
+      "first": 25,
+      "isos": [
+        "A/New York/392/2004"
+      ],
+      "segs": [
+        {
+          "segment": 1,
+          "accession": "NC_007373.1",
+          "length": 2341,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/New York/392/2004",
+          "release": "2005-08-30T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 2,
+          "accession": "NC_007372.1",
+          "length": 2341,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/New York/392/2004",
+          "release": "2005-08-30T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 3,
+          "accession": "NC_007371.1",
+          "length": 2233,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/New York/392/2004",
+          "release": "2005-08-30T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 4,
+          "accession": "NC_007366.1",
+          "length": 1762,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/New York/392/2004",
+          "release": "2005-08-30T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 5,
+          "accession": "NC_007369.1",
+          "length": 1566,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/New York/392/2004",
+          "release": "2005-08-30T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 6,
+          "accession": "NC_007368.1",
+          "length": 1467,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/New York/392/2004",
+          "release": "2005-08-30T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 7,
+          "accession": "NC_007367.1",
+          "length": 1027,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/New York/392/2004",
+          "release": "2005-08-30T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 8,
+          "accession": "NC_007370.1",
+          "length": 890,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/New York/392/2004",
+          "release": "2005-08-30T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "org": "Influenza A virus (A/goose/Guangdong/1/1996(H5N1))",
+      "subtype": "H5N1",
+      "first": 33,
+      "isos": [
+        "A/goose/Guangdong/1/1996",
+        "A/Goose/Guangdong/1/96(H5N1)"
+      ],
+      "segs": [
+        {
+          "segment": 1,
+          "accession": "NC_007357.1",
+          "length": 2341,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Goose/Guangdong/1/96(H5N1)",
+          "release": "2005-08-26T00:00:00Z",
+          "update": "2025-05-06T00:00:00Z"
+        },
+        {
+          "segment": 2,
+          "accession": "NC_007358.1",
+          "length": 2341,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/goose/Guangdong/1/1996",
+          "release": "2005-08-26T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 3,
+          "accession": "NC_007359.1",
+          "length": 2233,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/goose/Guangdong/1/1996",
+          "release": "2005-08-26T00:00:00Z",
+          "update": "2025-05-06T00:00:00Z"
+        },
+        {
+          "segment": 4,
+          "accession": "NC_007362.1",
+          "length": 1760,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/goose/Guangdong/1/1996",
+          "release": "2005-08-26T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 5,
+          "accession": "NC_007360.1",
+          "length": 1565,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Goose/Guangdong/1/96(H5N1)",
+          "release": "2005-08-26T00:00:00Z",
+          "update": "2025-05-06T00:00:00Z"
+        },
+        {
+          "segment": 6,
+          "accession": "NC_007361.1",
+          "length": 1458,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Goose/Guangdong/1/96(H5N1)",
+          "release": "2005-08-30T00:00:00Z",
+          "update": "2025-05-06T00:00:00Z"
+        },
+        {
+          "segment": 7,
+          "accession": "NC_007363.1",
+          "length": 1027,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/goose/Guangdong/1/1996",
+          "release": "2005-08-26T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 8,
+          "accession": "NC_007364.1",
+          "length": 865,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/goose/Guangdong/1/1996",
+          "release": "2005-08-26T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "org": "Influenza A virus (A/Hong Kong/1073/99(H9N2))",
+      "subtype": "H9N2",
+      "first": 41,
+      "isos": [
+        "A/Hong Kong/1073/99",
+        "A/Hong Kong/1073/99 (H9N2)"
+      ],
+      "segs": [
+        {
+          "segment": 1,
+          "accession": "NC_004910.1",
+          "length": 2341,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Hong Kong/1073/99",
+          "release": "2003-06-21T00:00:00Z",
+          "update": "2025-05-07T00:00:00Z"
+        },
+        {
+          "segment": 2,
+          "accession": "NC_004911.1",
+          "length": 2328,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Hong Kong/1073/99",
+          "release": "2003-06-21T00:00:00Z",
+          "update": "2025-05-06T00:00:00Z"
+        },
+        {
+          "segment": 3,
+          "accession": "NC_004912.1",
+          "length": 2225,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Hong Kong/1073/99",
+          "release": "2003-06-21T00:00:00Z",
+          "update": "2025-05-06T00:00:00Z"
+        },
+        {
+          "segment": 4,
+          "accession": "NC_004908.1",
+          "length": 1714,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Hong Kong/1073/99",
+          "release": "2003-06-21T00:00:00Z",
+          "update": "2025-05-06T00:00:00Z"
+        },
+        {
+          "segment": 5,
+          "accession": "NC_004905.2",
+          "length": 1557,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Hong Kong/1073/99",
+          "release": "2003-06-21T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 6,
+          "accession": "NC_004909.1",
+          "length": 1418,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Hong Kong/1073/99",
+          "release": "2003-06-21T00:00:00Z",
+          "update": "2025-05-06T00:00:00Z"
+        },
+        {
+          "segment": 7,
+          "accession": "NC_004907.1",
+          "length": 1025,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Hong Kong/1073/99 (H9N2)",
+          "release": "2003-06-23T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 8,
+          "accession": "NC_004906.1",
+          "length": 890,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Hong Kong/1073/99",
+          "release": "2003-06-21T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        }
+      ]
+    }
+  ],
+  "flu_b": [
+    {
+      "org": "Influenza B virus (B/Lee/1940)",
+      "subtype": null,
+      "first": 1,
+      "isos": [
+        "B/Lee/1940",
+        "B/Lee/40"
+      ],
+      "segs": [
+        {
+          "segment": 1,
+          "accession": "NC_002204.1",
+          "length": 2368,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "B/Lee/1940",
+          "release": "1993-08-02T00:00:00Z",
+          "update": "2025-05-07T00:00:00Z"
+        },
+        {
+          "segment": 2,
+          "accession": "NC_002205.1",
+          "length": 2313,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "B/Lee/1940",
+          "release": "1999-11-10T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 3,
+          "accession": "NC_002206.1",
+          "length": 2204,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "B/Lee/1940",
+          "release": "1999-11-10T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 4,
+          "accession": "NC_002207.1",
+          "length": 1882,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "B/Lee/40",
+          "release": "1993-08-02T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 5,
+          "accession": "NC_002208.1",
+          "length": 1841,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "B/Lee/1940",
+          "release": "1993-08-02T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 6,
+          "accession": "NC_002209.1",
+          "length": 1557,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "B/Lee/1940",
+          "release": "1993-08-02T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 7,
+          "accession": "NC_002210.1",
+          "length": 1191,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "B/Lee/1940",
+          "release": "1993-08-02T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 8,
+          "accession": "NC_002211.1",
+          "length": 1096,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "B/Lee/1940",
+          "release": "1993-08-02T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        }
+      ]
+    }
+  ],
+  "skipped_same_subtype": [
+    {
+      "org": "Influenza A virus (A/Puerto Rico/8/1934(H1N1))",
+      "subtype": "H1N1",
+      "first": 49,
+      "isos": [
+        "A/Puerto Rico/8/1934",
+        "A/Puerto Rico/8/1934(H1N1)"
+      ],
+      "segs": [
+        {
+          "segment": 1,
+          "accession": "NC_002023.1",
+          "length": 2341,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Puerto Rico/8/1934",
+          "release": "1982-11-03T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 2,
+          "accession": "NC_002021.1",
+          "length": 2341,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Puerto Rico/8/1934",
+          "release": "1993-08-02T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 3,
+          "accession": "NC_002022.1",
+          "length": 2233,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Puerto Rico/8/1934",
+          "release": "1982-11-03T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 4,
+          "accession": "NC_002017.1",
+          "length": 1778,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Puerto Rico/8/1934",
+          "release": "1983-07-13T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 5,
+          "accession": "NC_002019.1",
+          "length": 1565,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Puerto Rico/8/1934(H1N1)",
+          "release": "1993-08-02T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 6,
+          "accession": "NC_002018.1",
+          "length": 1413,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Puerto Rico/8/1934(H1N1)",
+          "release": "1993-08-02T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 7,
+          "accession": "NC_002016.1",
+          "length": 1027,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Puerto Rico/8/1934",
+          "release": "1982-06-09T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        },
+        {
+          "segment": 8,
+          "accession": "NC_002020.1",
+          "length": 890,
+          "completeness": "COMPLETE",
+          "source": "RefSeq",
+          "isolate": "A/Puerto Rico/8/1934",
+          "release": "1993-08-02T00:00:00Z",
+          "update": "2018-08-13T00:00:00Z"
+        }
+      ]
+    }
+  ],
+  "cov": {
+    "HCoV-229E": "NC_002645.1",
+    "HCoV-NL63": "NC_005831.2",
+    "HCoV-OC43": "NC_006213.1",
+    "HCoV-HKU1": "NC_006577.2",
+    "SARS-CoV": "NC_004718.3",
+    "MERS-CoV": "NC_019843.3"
+  },
+  "query": "NC_045512.2",
+  "outgroup": "NC_140766.1",
+  "outgroup_note": "Type species was not marked on the official Paramyxoviridae taxonomy record (tax_id 11158) or in official taxonomy searches for a type species. The first record on the official Paramyxoviridae RefSeq complete-genome catalog (Datasets virus dataset_report, filter.refseq_only=true and filter.complete_only=true) was NC_140767.1, whose catalog completeness field was COMPLETE but whose opened nucleotide title is \u201cHipposideros bat paramyxovirus isolate PREDICT-PmV-74/PDF-0699, partial genome\u201d. It was therefore not used as a complete genome. The next listed catalog record, NC_140766.1, has the opened title \u201cBat paramyxovirus, complete genome\u201d and esummary completeness=complete. That record was taken as the first listed Paramyxoviridae RefSeq complete genome whose own record text states that it is a complete genome."
+}

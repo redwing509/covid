@@ -1,0 +1,106 @@
+
+# BLAST/analysis commands start
+$ /opt/covid-tools/bin/makeblastdb -in /workspace/covid/data/raw/test-01/work/S_flu.fa -dbtype nucl -parse_seqids -out S_flu
+# cwd=/workspace/covid/data/raw/test-01/work/blast-db
+
+
+Building a new DB, current time: 11/21/2026 23:26:38
+New DB name:   /workspace/covid/data/raw/test-01/work/blast-db/S_flu
+New DB title:  /workspace/covid/data/raw/test-01/work/S_flu.fa
+Sequence type: Nucleotide
+Keep MBits: T
+Maximum file size: 3000000000B
+Adding sequences from FASTA; added 56 sequences in 0.110333 seconds.
+
+
+# exit=0
+$ /opt/covid-tools/bin/makeblastdb -in /workspace/covid/data/raw/test-01/work/S_cov.fa -dbtype nucl -parse_seqids -out S_cov
+# cwd=/workspace/covid/data/raw/test-01/work/blast-db
+
+
+Building a new DB, current time: 11/21/2026 23:26:38
+New DB name:   /workspace/covid/data/raw/test-01/work/blast-db/S_cov
+New DB title:  /workspace/covid/data/raw/test-01/work/S_cov.fa
+Sequence type: Nucleotide
+Keep MBits: T
+Maximum file size: 3000000000B
+Adding sequences from FASTA; added 6 sequences in 0.0910821 seconds.
+
+
+# exit=0
+$ /opt/covid-tools/bin/makeblastdb -in /workspace/covid/data/raw/test-01/work/outgroup.fa -dbtype nucl -parse_seqids -out outgroup
+# cwd=/workspace/covid/data/raw/test-01/work/blast-db
+
+
+Building a new DB, current time: 11/21/2026 23:26:38
+New DB name:   /workspace/covid/data/raw/test-01/work/blast-db/outgroup
+New DB title:  /workspace/covid/data/raw/test-01/work/outgroup.fa
+Sequence type: Nucleotide
+Keep MBits: T
+Maximum file size: 3000000000B
+Adding sequences from FASTA; added 1 sequences in 0.0917032 seconds.
+
+
+# exit=0
+$ /opt/covid-tools/bin/blastn -task blastn -query /workspace/covid/data/raw/test-01/work/Q.fa -db /workspace/covid/data/raw/test-01/work/blast-db/S_flu -evalue 1e-5 -max_target_seqs 1000 -max_hsps 20 -outfmt 6 qseqid sacc sseqid pident length evalue bitscore qcovs qstart qend sstart send qlen slen -out /workspace/covid/results/test-01/blast/NC_045512.2.S_flu.tsv
+# cwd=/workspace/covid/data/raw/test-01/work
+# exit=0
+$ /opt/covid-tools/bin/blastn -task blastn -query /workspace/covid/data/raw/test-01/work/Q.fa -db /workspace/covid/data/raw/test-01/work/blast-db/S_cov -evalue 1e-5 -max_target_seqs 1000 -max_hsps 20 -outfmt 6 qseqid sacc sseqid pident length evalue bitscore qcovs qstart qend sstart send qlen slen -out /workspace/covid/results/test-01/blast/NC_045512.2.S_cov.tsv
+# cwd=/workspace/covid/data/raw/test-01/work
+# exit=0
+$ /opt/covid-tools/bin/blastn -task blastn -query /workspace/covid/data/raw/test-01/work/Q.fa -db /workspace/covid/data/raw/test-01/work/blast-db/outgroup -evalue 1e-5 -max_target_seqs 1000 -max_hsps 20 -outfmt 6 qseqid sacc sseqid pident length evalue bitscore qcovs qstart qend sstart send qlen slen -out /workspace/covid/results/test-01/blast/NC_045512.2.outgroup.tsv
+# cwd=/workspace/covid/data/raw/test-01/work
+# exit=0
+
+# BLAST/analysis commands start
+$ /opt/covid-tools/bin/makeblastdb -in /workspace/covid/data/raw/test-01/work/S_flu.fa -dbtype nucl -parse_seqids -out S_flu
+# cwd=/workspace/covid/data/raw/test-01/work/blast-db
+
+
+Building a new DB, current time: 11/21/2026 23:27:20
+New DB name:   /workspace/covid/data/raw/test-01/work/blast-db/S_flu
+New DB title:  /workspace/covid/data/raw/test-01/work/S_flu.fa
+Sequence type: Nucleotide
+Keep MBits: T
+Maximum file size: 3000000000B
+Adding sequences from FASTA; added 56 sequences in 0.08726 seconds.
+
+
+# exit=0
+$ /opt/covid-tools/bin/makeblastdb -in /workspace/covid/data/raw/test-01/work/S_cov.fa -dbtype nucl -parse_seqids -out S_cov
+# cwd=/workspace/covid/data/raw/test-01/work/blast-db
+
+
+Building a new DB, current time: 11/21/2026 23:27:20
+New DB name:   /workspace/covid/data/raw/test-01/work/blast-db/S_cov
+New DB title:  /workspace/covid/data/raw/test-01/work/S_cov.fa
+Sequence type: Nucleotide
+Keep MBits: T
+Maximum file size: 3000000000B
+Adding sequences from FASTA; added 6 sequences in 0.0866261 seconds.
+
+
+# exit=0
+$ /opt/covid-tools/bin/makeblastdb -in /workspace/covid/data/raw/test-01/work/outgroup.fa -dbtype nucl -parse_seqids -out outgroup
+# cwd=/workspace/covid/data/raw/test-01/work/blast-db
+
+
+Building a new DB, current time: 11/21/2026 23:27:21
+New DB name:   /workspace/covid/data/raw/test-01/work/blast-db/outgroup
+New DB title:  /workspace/covid/data/raw/test-01/work/outgroup.fa
+Sequence type: Nucleotide
+Keep MBits: T
+Maximum file size: 3000000000B
+Adding sequences from FASTA; added 1 sequences in 0.0849252 seconds.
+
+
+# exit=0
+$ /opt/covid-tools/bin/blastn -task blastn -query /workspace/covid/data/raw/test-01/work/Q.fa -db /workspace/covid/data/raw/test-01/work/blast-db/S_flu -evalue 1e-5 -max_target_seqs 1000 -max_hsps 20 -outfmt 6 qseqid sacc sseqid pident length evalue bitscore qcovs qstart qend sstart send qlen slen -out /workspace/covid/results/test-01/blast/NC_045512.2.S_flu.tsv
+# cwd=/workspace/covid/data/raw/test-01/work
+# exit=0
+$ /opt/covid-tools/bin/blastn -task blastn -query /workspace/covid/data/raw/test-01/work/Q.fa -db /workspace/covid/data/raw/test-01/work/blast-db/S_cov -evalue 1e-5 -max_target_seqs 1000 -max_hsps 20 -outfmt 6 qseqid sacc sseqid pident length evalue bitscore qcovs qstart qend sstart send qlen slen -out /workspace/covid/results/test-01/blast/NC_045512.2.S_cov.tsv
+# cwd=/workspace/covid/data/raw/test-01/work
+# exit=0
+$ /opt/covid-tools/bin/blastn -task blastn -query /workspace/covid/data/raw/test-01/work/Q.fa -db /workspace/covid/data/raw/test-01/work/blast-db/outgroup -evalue 1e-5 -max_target_seqs 1000 -max_hsps 20 -outfmt 6 qseqid sacc sseqid pident length evalue bitscore qcovs qstart qend sstart send qlen slen -out /workspace/covid/results/test-01/blast/NC_045512.2.outgroup.tsv
+# cwd=/workspace/covid/data/raw/test-01/work
+# exit=0
