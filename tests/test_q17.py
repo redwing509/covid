@@ -27,7 +27,6 @@ class RegistrationTests(unittest.TestCase):
         text = (ROOT / "tests" / "PRE-REGISTERED-AGREEMENT-Q17.md").read_text()
         self.assertIn("Written:** Sun 22 Nov 2026, 4:46 PM PST", text)
         self.assertIn("before any new", text)
-        self.assertIn("letter remains B-blast", text.lower() if False else "The letter remains B-blast")
         self.assertIn("The letter remains B-blast regardless of these results.", text)
         self.assertIn("k = 21", text)
         self.assertIn("UFBoot ≥ 95", text)
@@ -100,6 +99,17 @@ class TreeAgreementTests(unittest.TestCase):
         low = "(((Q:0.01,C1:0.01):0.01,C2:0.01)50/70:0.2,(F1:0.01,F2:0.01):0.2,O:0.3);"
         r = assess_tree(low, "Q", "O", ["F1", "F2"], ["C1", "C2"])
         self.assertEqual(r["verdict"], "INCONCLUSIVE")
+        # Neither monophyly split present (Q with one cov and one flu).
+        neither = "(((Q:0.01,C1:0.01):0.01,F1:0.01)80/95:0.2,(C2:0.01,F2:0.01):0.2,O:0.3);"
+        r = assess_tree(neither, "Q", "O", ["F1", "F2"], ["C1", "C2"])
+        self.assertEqual(r["verdict"], "INCONCLUSIVE")
+        # Singleton outgroup is not its own internal node; monophyly split
+        # already places the outgroup on the far side (Method 2 workaround).
+        # Unrooted form: ((Q,C1,C2),F1,F2,O) with support on the Q+cov clade.
+        singleton_og = "((Q:0.01,C1:0.01,C2:0.01)80/95:0.2,F1:0.01,F2:0.01,O:0.3);"
+        r = assess_tree(singleton_og, "Q", "O", ["F1", "F2"], ["C1", "C2"])
+        self.assertTrue(r["outgroup_split"])
+        self.assertEqual(r["verdict"], "AGREE")
 
 
 if __name__ == "__main__":

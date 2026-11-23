@@ -93,17 +93,51 @@ def build_genomes(sel: dict):
     return query_acc, outgroup_acc, query, flu, cov, outgroup
 
 
-def load_seqs(root: Path, needed):
+def load_seqs(root: Path, needed, combined: Path | None = None):
+    """Load sequences from the hashed combined FASTA; check by-accession copies."""
+    if combined is None:
+        combined = root / "data/raw/test-01/fasta/all-selected.fasta"
+    recs = read_fa(combined)
     seqs = {}
-    for p in (root / "data/raw/test-01/fasta/by-accession").glob("*.fasta"):
-        recs = read_fa(p)
-        if len(recs) != 1:
-            raise SystemExit(f"expected one record in {p}")
-        seqs[p.stem] = recs[0][1]
+    for header, seq in recs:
+        acc = header.split()[0]
+        if acc in seqs:
+            raise SystemExit(f"duplicate accession {acc} in {combined}")
+        seqs[acc] = seq
+    by_dir = root / "data/raw/test-01/fasta/by-accession"
+    if by_dir.is_dir():
+        for path in sorted(by_dir.glob("*.fasta")):
+            recs = read_fa(path)
+            if len(recs) != 1:
+                raise SystemExit(f"expected one record in {path}")
+            acc = recs[0][0].split()[0]
+            seq = recs[0][1]
+            if acc in seqs and seqs[acc] != seq:
+                raise SystemExit(f"by-accession {path} differs from hashed combined FASTA")
+            if path.stem != acc and path.stem not in seqs:
+                # stem is the usual accession.version; already checked by header
+                pass
     missing = [a for a in needed if a not in seqs]
     if missing:
         raise SystemExit(f"missing FASTA: {missing}")
     return seqs
+
+
+def require_tool_versions(mafft: str, iqtree: str, pins: dict, log_fh, cwd):
+    """Refuse to score if MAFFT or IQ-TREE is not the pinned version."""
+    want_m = str(pins["tools"]["mafft"])
+    want_i = str(pins["tools"]["iqtree"])
+    m_proc = run([mafft, "--version"], cwd=cwd, log_fh=log_fh)
+    i_proc = run([iqtree, "--version"], cwd=cwd, log_fh=log_fh)
+    m_txt = (m_proc.stdout or "") + (m_proc.stderr or "")
+    i_txt = (i_proc.stdout or "") + (i_proc.stderr or "")
+    # MAFFT prints "v7.526 (...)"; the pin is "7.526".
+    if want_m not in m_txt:
+        raise SystemExit(f"MAFFT version mismatch: wanted {want_m}, got {m_txt.strip()!r}")
+    if want_i not in i_txt:
+        raise SystemExit(f"IQ-TREE version mismatch: wanted {want_i}, got {i_txt.strip()!r}")
+    log_fh.write(f"# tool versions ok: MAFFT {want_m}, IQ-TREE {want_i}\n")
+    log_fh.flush()
 
 
 def concat_genome(genome, seqs, spacer=""):
@@ -271,11 +305,12 @@ def assess_tree(newick: str, query, outgroup, flu_headers, cov_headers):
         report["verdict"] = "DISAGREE"
         report["reason"] = "Q groups with S_flu to the exclusion of S_cov with support at threshold"
         return report
-    # Supported placement with neither?
-    # If both bipartitions are absent, Q may sit outside both groups.
+    # A "groups with neither" DISAGREE is allowed only for a supported
+    # topology. If both monophyly splits are simply absent, monophyly
+    # cannot be assessed and the pre-registered rule is INCONCLUSIVE.
     if not report["has_q_cov"] and not report["has_q_flu"]:
-        report["verdict"] = "DISAGREE"
-        report["reason"] = "Q is outside both {Q+S_cov} and {Q+S_flu} (or those splits are absent)"
+        report["verdict"] = "INCONCLUSIVE"
+        report["reason"] = "neither {Q+S_cov} nor {Q+S_flu} is a split, so monophyly cannot be assessed"
         return report
     report["verdict"] = "INCONCLUSIVE"
     report["reason"] = "required monophyly split missing or support below threshold"
@@ -312,16 +347,13 @@ def run_identity_gate(script: Path, aln: Path, log_fh):
 
 def run_mafft_iqtree(in_fa: Path, work: Path, outgroup: str, mafft: str, iqtree: str, prefix: str, log_fh, ident_script: Path):
     result = {"status": "INCONCLUSIVE", "sub": None, "notes": []}
-    env = os.environ.copy()
     proc = run(
         [mafft, "--auto", "--maxiterate", "1000", "--thread", "1", str(in_fa)],
         cwd=work,
         log_fh=log_fh,
     )
     aln_fa = work / f"{prefix}.aln.fa"
-    # `run()` captures stdout into the log; MAFFT writes the alignment to stdout.
-    # Re-run capturing ourselves because run() does not return the alignment path.
-    # The helper already raised on failure; stdout is in the log and proc.stdout.
+    # MAFFT writes the alignment to stdout; `run()` returns that as proc.stdout.
     aln_fa.write_text(proc.stdout)
     aln = read_fa(aln_fa)
     if not aln:
@@ -540,14 +572,10 @@ def method3(query, flu, cov, outgroup, seqs):
         primary = "INCONCLUSIVE"
         reason = "empty k-mer set or missing comparison set"
     elif len(ties) != 1:
-        kinds_tied = {e["kind"] for e in ties}
-        if len(kinds_tied) == 1 and "S_cov" in kinds_tied and d_cov is not None and d_flu is not None and d_cov < d_flu:
-            # ties only within S_cov, still AGREE if mean rule holds
-            primary = "AGREE"
-            reason = "nearest-neighbor tie is within S_cov; mean d_cov < d_flu"
-        else:
-            primary = "INCONCLUSIVE"
-            reason = "tie for nearest reference"
+        # The frozen rule records any tie for nearest, including a tie
+        # only within S_cov, as INCONCLUSIVE.
+        primary = "INCONCLUSIVE"
+        reason = "tie for nearest reference"
     elif nearest_kind == "S_cov" and d_cov is not None and d_flu is not None and d_cov < d_flu:
         primary = "AGREE"
         reason = "nearest reference is in S_cov and mean d_cov < d_flu"
@@ -577,29 +605,33 @@ def method3(query, flu, cov, outgroup, seqs):
             if clade == {og} or other == {og}:
                 og_ok = True
                 break
+        def has(group_a, group_b):
+            want = frozenset(group_a)
+            if want | frozenset(group_b) != leaves:
+                return False
+            for clade, label, _ in parts:
+                if clade == want or (leaves - clade) == want:
+                    return True
+            return False
+        has_b = has({q} | cov_h, flu_h | {og})
+        has_a = has({q} | flu_h, cov_h | {og})
+        # A monophyly split that already places the outgroup on the far
+        # side is enough, even if the singleton outgroup was not written
+        # as its own Newick node (same workaround as Method 2).
+        if not og_ok and (has_b or has_a):
+            og_ok = True
         if not og_ok:
             topo = "INCONCLUSIVE"
             topo_reason = "outgroup split absent in NJ tree"
+        elif has_b:
+            topo = "AGREE"
+            topo_reason = "NJ: Q groups with S_cov excluding S_flu"
+        elif has_a:
+            topo = "DISAGREE"
+            topo_reason = "NJ: Q groups with S_flu excluding S_cov"
         else:
-            def has(group_a, group_b):
-                want = frozenset(group_a)
-                if want | frozenset(group_b) != leaves:
-                    return False
-                for clade, label, _ in parts:
-                    if clade == want or (leaves - clade) == want:
-                        return True
-                return False
-            has_b = has({q} | cov_h, flu_h | {og})
-            has_a = has({q} | flu_h, cov_h | {og})
-            if has_b:
-                topo = "AGREE"
-                topo_reason = "NJ: Q groups with S_cov excluding S_flu"
-            elif has_a:
-                topo = "DISAGREE"
-                topo_reason = "NJ: Q groups with S_flu excluding S_cov"
-            else:
-                topo = "DISAGREE"
-                topo_reason = "NJ: Q groups with neither"
+            topo = "INCONCLUSIVE"
+            topo_reason = "NJ: neither monophyly split is present"
 
     method = primary
     if primary in ("AGREE", "DISAGREE") and topo in ("AGREE", "DISAGREE") and primary != topo:
@@ -615,7 +647,7 @@ def method3(query, flu, cov, outgroup, seqs):
         "nearest": nearest,
         "ties": ties,
         "primary": primary,
-        "primary_reason": reason if method == primary else reason,
+        "primary_reason": reason,
         "nj_newick": nwk,
         "nj_topology": topo,
         "nj_reason": topo_reason,
@@ -639,7 +671,7 @@ def main(argv=None):
     sel = load_selection(root)
     query_acc, outgroup_acc, query, flu, cov, outgroup = build_genomes(sel)
     needed = [query_acc, outgroup_acc] + [s["accession"] for g in flu + cov + [outgroup, query] for s in g["segs"]]
-    seqs = load_seqs(root, needed)
+    seqs = load_seqs(root, needed, combined=fasta)
 
     out = Path(os.environ.get("Q17_RESULT_DIR", str(root / "results" / "test-01" / "q17")))
     out.mkdir(parents=True, exist_ok=True)
@@ -657,6 +689,7 @@ def main(argv=None):
 
     bindir = Path("/opt/covid-tools/bin")
     tools = {"mafft": str(bindir / "mafft"), "iqtree": str(bindir / "iqtree3")}
+    require_tool_versions(tools["mafft"], tools["iqtree"], pins, log_fh, cwd=out)
 
     # Load committed BLAST tables (no new BLAST for the letter).
     blast_dir = root / "results" / "test-01" / "blast"
@@ -671,7 +704,6 @@ def main(argv=None):
 
     (work / "t-protocol").mkdir(parents=True, exist_ok=True)
     t1 = t_protocol(query, flu, cov, outgroup, seqs, blast_tables, work / "t-protocol", log_fh, tools, ident_copy)
-    # t_protocol also mkdir via write? ensure dir exists before call - fix order
     method2 = {"attempt": "T-protocol", "raw": {k: v for k, v in t1.items() if k not in ("iqtree_report_text",)}}
     tree_verdict = "INCONCLUSIVE"
     tree_reason = t1.get("sub") or "; ".join(t1.get("notes") or [])
@@ -710,7 +742,6 @@ def main(argv=None):
     method2["reason"] = tree_reason
 
     m3 = method3(query, flu, cov, outgroup, seqs)
-    # Drop bulky pairwise duplication for the written report's top level
     m3_out = dict(m3)
     overall = "PASS"
     if tree_verdict == "DISAGREE" or m3["verdict"] == "DISAGREE":
@@ -746,8 +777,4 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
-    # Create t-protocol work dir before running trim writes
-    try:
-        sys.exit(main())
-    except Exception:
-        raise
+    sys.exit(main())
