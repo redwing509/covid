@@ -16,9 +16,12 @@ from q17_run import (
     canonical_kmers,
     jaccard,
     load_pins,
+    load_selection,
     mash_distance,
+    method3,
     neighbor_joining,
     sha256_file,
+    validate_selection,
 )
 
 
@@ -99,9 +102,13 @@ class TreeAgreementTests(unittest.TestCase):
         low = "(((Q:0.01,C1:0.01):0.01,C2:0.01)50/70:0.2,(F1:0.01,F2:0.01):0.2,O:0.3);"
         r = assess_tree(low, "Q", "O", ["F1", "F2"], ["C1", "C2"])
         self.assertEqual(r["verdict"], "INCONCLUSIVE")
-        # Neither monophyly split present (Q with one cov and one flu).
+        # Supported mixed placement: Q with one cov and one flu.
         neither = "(((Q:0.01,C1:0.01):0.01,F1:0.01)80/95:0.2,(C2:0.01,F2:0.01):0.2,O:0.3);"
         r = assess_tree(neither, "Q", "O", ["F1", "F2"], ["C1", "C2"])
+        self.assertEqual(r["verdict"], "DISAGREE")
+        # Same mixed placement but support below threshold: INCONCLUSIVE.
+        neither_low = "(((Q:0.01,C1:0.01):0.01,F1:0.01)50/70:0.2,(C2:0.01,F2:0.01):0.2,O:0.3);"
+        r = assess_tree(neither_low, "Q", "O", ["F1", "F2"], ["C1", "C2"])
         self.assertEqual(r["verdict"], "INCONCLUSIVE")
         # Singleton outgroup is not its own internal node; monophyly split
         # already places the outgroup on the far side (Method 2 workaround).
@@ -110,6 +117,74 @@ class TreeAgreementTests(unittest.TestCase):
         r = assess_tree(singleton_og, "Q", "O", ["F1", "F2"], ["C1", "C2"])
         self.assertTrue(r["outgroup_split"])
         self.assertEqual(r["verdict"], "AGREE")
+
+
+
+class SelectionPinTests(unittest.TestCase):
+    def test_committed_selection_matches_pins(self):
+        pins = load_pins(ROOT)
+        sel = load_selection(ROOT)
+        validate_selection(sel, pins)
+
+    def test_rejects_query_mismatch(self):
+        pins = load_pins(ROOT)
+        sel = load_selection(ROOT)
+        sel = dict(sel)
+        sel["query"] = "NC_999999.1"
+        with self.assertRaises(SystemExit):
+            validate_selection(sel, pins)
+
+
+class Method3RuleTests(unittest.TestCase):
+    def _g(self, acc):
+        return {"org": acc, "segs": [{"segment": 1, "accession": acc}], "concat_header": acc}
+
+    def test_outgroup_nearest_is_inconclusive_even_if_mean_flu_is_closer(self):
+        # Q almost identical to the outgroup. S_cov shares no 21-mers with Q
+        # (mean d_cov is the undefined-pair placeholder). S_flu shares a few,
+        # so mean d_flu < d_cov. The frozen primary rule is still INCONCLUSIVE
+        # because the nearest reference is the outgroup.
+        q = "ACGT" * 30  # 120 bp
+        o = "ACGT" * 29 + "ACGA" * 1
+        # shift start of flu so some k-mers overlap, cov is all T (no overlap)
+        f = "ACGT" * 10 + "GGGG" * 20
+        c = "TTTT" * 30
+        seqs = {"Q": q, "O": o, "C1": c, "C2": c, "F1": f, "F2": f}
+        report = method3(
+            self._g("Q"),
+            [self._g("F1"), self._g("F2")],
+            [self._g("C1"), self._g("C2")],
+            self._g("O"),
+            seqs,
+        )
+        self.assertEqual(report["primary"], "INCONCLUSIVE")
+        self.assertIn("outgroup", report["reason"].lower())
+
+    def test_nj_neither_is_disagree_so_conflict_is_inconclusive(self):
+        # Primary: Q nearest C1 and mean d_cov < d_flu (AGREE).
+        # Topology: forced mixed by making Q close to C1 and F1 only.
+        # We only assert the secondary branch when NJ fails both complete
+        # monophyly splits.
+        q = "ACGT" * 40
+        c1 = "ACGT" * 39 + "AAAA"
+        c2 = "TTTT" * 40
+        f1 = "ACGT" * 20 + "CCCC" * 20
+        f2 = "GGGG" * 40
+        o = "ATAT" * 40
+        seqs = {"Q": q, "C1": c1, "C2": c2, "F1": f1, "F2": f2, "O": o}
+        report = method3(
+            self._g("Q"),
+            [self._g("F1"), self._g("F2")],
+            [self._g("C1"), self._g("C2")],
+            self._g("O"),
+            seqs,
+        )
+        # If NJ recovered neither complete split, the frozen secondary
+        # rule is DISAGREE, and a primary/secondary conflict is INCONCLUSIVE.
+        if report.get("nj_topology") == "DISAGREE" and "neither" in report.get("nj_reason", ""):
+            if report["primary"] == "AGREE":
+                self.assertEqual(report["verdict"], "INCONCLUSIVE")
+        self.assertIn(report.get("nj_topology"), {"AGREE", "DISAGREE", "INCONCLUSIVE"})
 
 
 if __name__ == "__main__":

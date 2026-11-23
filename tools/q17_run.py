@@ -68,6 +68,40 @@ def load_selection(root: Path) -> dict:
     return json.loads((root / "results" / "test-01" / "selection.json").read_text())
 
 
+
+def validate_selection(sel: dict, pins: dict) -> None:
+    """Refuse to score if selection.json does not match the frozen pins."""
+    query = sel.get("query")
+    pin_query = pins["query"][0] if isinstance(pins["query"], list) else pins["query"]
+    if query != pin_query:
+        raise SystemExit(f"selection query {query!r} != pin {pin_query!r}")
+    cov = sel.get("cov") or {}
+    cov_accs = list(cov.values()) if isinstance(cov, dict) else list(cov)
+    if set(cov_accs) != set(pins["s_cov"]):
+        raise SystemExit(f"selection S_cov {sorted(cov_accs)} != pins {sorted(pins['s_cov'])}")
+    if len(cov_accs) != len(set(cov_accs)):
+        raise SystemExit("selection S_cov accessions are not unique")
+    og = sel.get("outgroup")
+    if og != pins["outgroup"]:
+        raise SystemExit(f"selection outgroup {og!r} != pin {pins['outgroup']!r}")
+    flu = list(sel.get("flu_a") or []) + list(sel.get("flu_b") or [])
+    if len(flu) != 7:
+        raise SystemExit(f"selection must have 7 influenza genomes, got {len(flu)}")
+    flu_accs = []
+    for g in flu:
+        segs = g.get("segs") or []
+        if len(segs) != 8:
+            raise SystemExit(f"influenza genome {g.get('first') or g.get('org')!r} does not have 8 segments")
+        for s in segs:
+            acc = s.get("accession") if isinstance(s, dict) else s
+            flu_accs.append(acc)
+    all_accs = [query, og] + cov_accs + flu_accs
+    if len(all_accs) != len(set(all_accs)):
+        raise SystemExit("selection accessions are not unique across query, S_cov, S_flu, and outgroup")
+    if set(flu_accs) & set(pins["s_cov"]) or query in flu_accs or og in flu_accs:
+        raise SystemExit("S_flu membership overlaps query, S_cov, or the outgroup")
+
+
 def build_genomes(sel: dict):
     query_acc = sel["query"]
     outgroup_acc = sel["outgroup"]
@@ -289,13 +323,33 @@ def assess_tree(newick: str, query, outgroup, flu_headers, cov_headers):
     if not report["outgroup_split"] and (report["has_q_cov"] or report["has_q_flu"]):
         report["outgroup_split"] = True
         report["outgroup_label"] = "inferred-from-monophyly-split"
+
+    def supported(sh, uf):
+        return sh is not None and uf is not None and uf >= UFBOOT_MIN and sh >= SHALRT_MIN
+
+    def q_vs_outgroup_splits(require_support: bool):
+        found = []
+        for clade, label, _ in parts:
+            sh_m, uf_m = parse_support_label(label)
+            if require_support and not supported(sh_m, uf_m):
+                continue
+            other = leaves - clade
+            if query in clade and outgroup in other:
+                qside = clade
+            elif query in other and outgroup in clade:
+                qside = other
+            else:
+                continue
+            found.append((qside, label, sh_m, uf_m))
+        return found
+
+    if not report["outgroup_split"] and q_vs_outgroup_splits(require_support=True):
+        report["outgroup_split"] = True
+        report["outgroup_label"] = "inferred-from-supported-mixed-split"
     if not report["outgroup_split"]:
         report["reason"] = "outgroup does not form a single split from all other taxa"
         report["verdict"] = "INCONCLUSIVE"
         return report
-
-    def supported(sh, uf):
-        return sh is not None and uf is not None and uf >= UFBOOT_MIN and sh >= SHALRT_MIN
 
     if report["has_q_cov"] and supported(sh_b, uf_b):
         report["verdict"] = "AGREE"
@@ -305,12 +359,33 @@ def assess_tree(newick: str, query, outgroup, flu_headers, cov_headers):
         report["verdict"] = "DISAGREE"
         report["reason"] = "Q groups with S_flu to the exclusion of S_cov with support at threshold"
         return report
-    # A "groups with neither" DISAGREE is allowed only for a supported
-    # topology. If both monophyly splits are simply absent, monophyly
-    # cannot be assessed and the pre-registered rule is INCONCLUSIVE.
+    # Frozen Method 2 DISAGREE includes a *supported* placement of Q
+    # outside both {Q+S_cov} and {Q+S_flu}. If those complete-group
+    # splits are simply absent and no supported mixed placement is
+    # present, monophyly cannot be assessed and the rule is INCONCLUSIVE.
     if not report["has_q_cov"] and not report["has_q_flu"]:
+        mixed = False
+        for clade, label, _ in parts:
+            sh_m, uf_m = parse_support_label(label)
+            if not supported(sh_m, uf_m):
+                continue
+            other = leaves - clade
+            if query in clade and outgroup in other:
+                qside = clade
+            elif query in other and outgroup in clade:
+                qside = other
+            else:
+                continue
+            if qside == ({query} | set(cov_headers)) or qside == ({query} | set(flu_headers)):
+                continue
+            mixed = True
+            break
+        if mixed:
+            report["verdict"] = "DISAGREE"
+            report["reason"] = "supported topology places Q outside both {Q+S_cov} and {Q+S_flu}"
+            return report
         report["verdict"] = "INCONCLUSIVE"
-        report["reason"] = "neither {Q+S_cov} nor {Q+S_flu} is a split, so monophyly cannot be assessed"
+        report["reason"] = "neither {Q+S_cov} nor {Q+S_flu} is a split, and no supported mixed placement is present"
         return report
     report["verdict"] = "INCONCLUSIVE"
     report["reason"] = "required monophyly split missing or support below threshold"
@@ -347,6 +422,15 @@ def run_identity_gate(script: Path, aln: Path, log_fh):
 
 def run_mafft_iqtree(in_fa: Path, work: Path, outgroup: str, mafft: str, iqtree: str, prefix: str, log_fh, ident_script: Path):
     result = {"status": "INCONCLUSIVE", "sub": None, "notes": []}
+    try:
+        return _run_mafft_iqtree_inner(in_fa, work, outgroup, mafft, iqtree, prefix, log_fh, ident_script, result)
+    except SystemExit as exc:
+        result["sub"] = "C-alignment"
+        result["notes"].append(f"MAFFT or IQ-TREE failed: {exc}")
+        return result
+
+
+def _run_mafft_iqtree_inner(in_fa, work, outgroup, mafft, iqtree, prefix, log_fh, ident_script, result):
     proc = run(
         [mafft, "--auto", "--maxiterate", "1000", "--thread", "1", str(in_fa)],
         cwd=work,
@@ -576,15 +660,17 @@ def method3(query, flu, cov, outgroup, seqs):
         # only within S_cov, as INCONCLUSIVE.
         primary = "INCONCLUSIVE"
         reason = "tie for nearest reference"
+    elif nearest_kind == "outgroup":
+        # Check this before the mean d_flu < d_cov DISAGREE branch so an
+        # outgroup nearest is never scored as DISAGREE.
+        primary = "INCONCLUSIVE"
+        reason = "nearest reference is the outgroup"
     elif nearest_kind == "S_cov" and d_cov is not None and d_flu is not None and d_cov < d_flu:
         primary = "AGREE"
         reason = "nearest reference is in S_cov and mean d_cov < d_flu"
     elif nearest_kind == "S_flu" or (d_flu is not None and d_cov is not None and d_flu < d_cov):
         primary = "DISAGREE"
         reason = "nearest reference is in S_flu or mean d_flu < d_cov"
-    elif nearest_kind == "outgroup":
-        primary = "INCONCLUSIVE"
-        reason = "nearest reference is the outgroup"
     else:
         primary = "INCONCLUSIVE"
         reason = "nearest/mean rule did not reach AGREE or DISAGREE"
@@ -630,8 +716,10 @@ def method3(query, flu, cov, outgroup, seqs):
             topo = "DISAGREE"
             topo_reason = "NJ: Q groups with S_flu excluding S_cov"
         else:
-            topo = "INCONCLUSIVE"
-            topo_reason = "NJ: neither monophyly split is present"
+            # Frozen Method 3 secondary: "or with neither" is DISAGREE so
+            # a conflict with the primary can become INCONCLUSIVE (conflict).
+            topo = "DISAGREE"
+            topo_reason = "NJ: Q groups with neither S_cov nor S_flu"
 
     method = primary
     if primary in ("AGREE", "DISAGREE") and topo in ("AGREE", "DISAGREE") and primary != topo:
@@ -669,6 +757,7 @@ def main(argv=None):
         raise SystemExit(f"FASTA record count {len(recs)} != {pins['fasta']['n_records']}")
 
     sel = load_selection(root)
+    validate_selection(sel, pins)
     query_acc, outgroup_acc, query, flu, cov, outgroup = build_genomes(sel)
     needed = [query_acc, outgroup_acc] + [s["accession"] for g in flu + cov + [outgroup, query] for s in g["segs"]]
     seqs = load_seqs(root, needed, combined=fasta)
