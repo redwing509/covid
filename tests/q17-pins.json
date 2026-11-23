@@ -1,0 +1,17 @@
+{
+  "id": "Q-17",
+  "written": "2026-11-22 4:46 PM PST",
+  "written_before_mafft_iqtree_or_kmer": true,
+  "agreement_document": "tests/PRE-REGISTERED-AGREEMENT-Q17.md",
+  "test1_letter_unchanged": "B-blast",
+  "fasta": {
+    "path": "data/raw/test-01/fasta/all-selected.fasta",
+    "sha256": "787a51c247a3fa2195f75989a28783e6edbe3ff38c76117115a87349ababa0b3",
+    "n_records": 64
+  },
+  "query": ["NC_045512.2"],
+  "s_cov": ["NC_002645.1", "NC_005831.2", "NC_006213.1", "NC_006577.2", "NC_004718.3", "NC_019843.3"],
+  "outgroup": "NC_140766.1",
+  "tools": {"mafft": "7.526", "iqtree": "3.1.4", "k": 21, "ufboot": 1000, "alrt": 1000, "seed": 12345},
+  "tree_thresholds": {"ufboot_min": 95, "alrt_min": 80}
+}
