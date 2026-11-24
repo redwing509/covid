@@ -1,0 +1,11 @@
+{
+  "url_opened": "https://ijvtpr.com/index.php/IJVTPR/article/view/81",
+  "doi": "10.56098/ijvtpr.v3i1.81",
+  "title": "Comments on Kämmerer, et al. (2023) regarding RT-PCR Testing",
+  "claim": "the recorded quote was verbatim on the opened page",
+  "verdict": "FALSE",
+  "quote": "UNKNOWN",
+  "how_verified": "Opened the URL with web_extract twice; both fetches returned consistent content (title, abstract, references, How to Cite DOI). Compared the recorded quote word-for-word against the opened page's clearly marked Abstract section and all extracted page content.",
+  "how_opened": "abstract only",
+  "limitations": "The recorded quote ('in order to test the first and the second of Koch's postulates, there must be both a purified germ and a specified disease, neither of which was available for COVID-19') does not appear in the abstract or anywhere in the extracted page content, so no verbatim quote from the page can be supplied. The full article body/galley (PDF or HTML full text) was not retrieved; a quote present only in non-extracted full text cannot be ruled out by this check. The abstract itself (verified complete across both fetches) discusses RT-PCR trustworthiness and the definition of COVID-19 disease and contains no mention of Koch's postulates or a purified germ."
+}

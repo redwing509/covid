@@ -1,0 +1,32 @@
+{
+  "checked": "2026-11-24 11:46:18 AM PST",
+  "rows": [
+    {
+      "url": "https://ijvtpr.com/index.php/IJVTPR/article/view/81",
+      "http_status": 200,
+      "final_url": "https://ijvtpr.com/index.php/IJVTPR/article/view/81",
+      "quote_check": "NOT_FOUND",
+      "doi": "10.56098/ijvtpr.v3i1.81",
+      "doi_on_page": true,
+      "bytes": 36049,
+      "landing_page_quote_check": "NOT_FOUND",
+      "official_pdf": "https://ijvtpr.com/index.php/IJVTPR/article/download/81/401/717",
+      "official_pdf_quote_check": "DIFFERENT_WORDING",
+      "note": "Hermes recorded quote is not on the article landing page (abstract only). The official journal PDF was later opened. The PDF wording is similar but not the same as the recorded quote, so the recorded quote stays unverified. Use the PDF sentence if quoting this source.",
+      "pdf_verbatim": "As a matter of fact, in order to test even the first and second of Koch’s postulates, we must have a purified germ and a well specified disease. As we have seen, neither of these is available:"
+    },
+    {
+      "url": "https://ijvtpr.com/index.php/IJVTPR/article/view/82",
+      "http_status": 200,
+      "final_url": "https://ijvtpr.com/index.php/IJVTPR/article/view/82",
+      "quote_check": "NOT_FOUND",
+      "doi": "10.56098/ijvtpr.v3i1.82",
+      "doi_on_page": true,
+      "bytes": 46364,
+      "landing_page_quote_check": "VERBATIM_TYPOGRAPHIC_APOSTROPHE",
+      "official_pdf": "https://ijvtpr.com/index.php/IJVTPR/article/download/82/217/422",
+      "official_pdf_quote_check": "VERBATIM_WITH_PAGE_BREAKS",
+      "note": "The recorded quote is in the abstract on the landing page, using typographic apostrophes (Koch’s). The '...' in the Hermes record stands in for item 1, which is on the page. Official PDF confirms the same sentences."
+    }
+  ]
+}

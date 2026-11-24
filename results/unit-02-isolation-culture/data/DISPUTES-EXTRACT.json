@@ -1,0 +1,18 @@
+{
+  "entries": [
+    {
+      "claim_or_test": "H-A isolation and culture (failed, disputed, or reply)",
+      "url": "https://ijvtpr.com/index.php/IJVTPR/article/view/82",
+      "doi": "10.56098/ijvtpr.v3i1.82",
+      "title": "Response to Comments on Kämmerer, et al. (2023) regarding RT-PCR Testing",
+      "what_was_measured": "UNKNOWN",
+      "population_or_system": "UNKNOWN",
+      "measured_result_quote": "They point to the lack of a specific definition of COVID-19 disease and conclude that, in order to test the first and the second of Koch's postulates, there must be both a purified germ and a specified disease, neither of which was available for COVID-19. In reply, we address two questions they did not ask: ... 2. Are Koch's postulates valid for viruses?",
+      "evidence_level": "UNKNOWN",
+      "how_opened": "full text",
+      "kind": "reply",
+      "negatives_or_limits": "Because there are no tools suitable for comprehensive and exclusive detection of infectious pathogens, we need to proceed carefully in applying the limited tools that do exist for tracing and tracking viral pathogens, to avoid under- or over-estimating a real or suspected pandemic."
+    }
+  ],
+  "notes": "DISPUTES-VERIFIED.json contains one verdict-TRUE source: the Kämmerer et al. (2023) reply at https://ijvtpr.com/index.php/IJVTPR/article/view/82 (opened this turn with web_extract; the recorded quote matches the page text verbatim, full text). The paired critique Franchi & Tomsic (article/view/81, VERIFY-D01) had verdict FALSE and is excluded per the verdict-TRUE-only rule; no new sources were added. The reply is a journal commentary, not an empirical study, so what_was_measured, population_or_system, and evidence_level are UNKNOWN; negatives_or_limits is a verbatim limitation sentence from the opened page. DOI 10.56098/ijvtpr.v3i1.82 comes from DISPUTES-SOURCES.json / DISPUTES-VERIFIED.json; VERIFY-D02 notes no DOI was visible on the opened landing page."
+}

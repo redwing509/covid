@@ -1,0 +1,54 @@
+{
+  "queries": [
+    {"lang": "en", "query": "SARS-CoV-2 isolation culture primary source peer-reviewed paper Vero cells 2020"},
+    {"lang": "en", "query": "isolation of SARS-CoV-2 paper first isolation Wuhan Hu-1"},
+    {"lang": "en", "query": "SARS-CoV-2 isolation failed disputed critique methods paper"}
+  ],
+  "sources": [
+    {
+      "url": "https://wwwnc.cdc.gov/eid/article/26/6/20-0516_article",
+      "doi": "",
+      "title": "Severe Acute Respiratory Syndrome Coronavirus 2 from Patient with Coronavirus Disease, United States",
+      "year": "2020",
+      "authors_or_institution": "Harcourt J, Tamin A, Lu X, et al.; US Centers for Disease Control and Prevention",
+      "why_relevant": "Primary isolation report from the first US COVID-19 patient; virus propagated in Vero CCL-81 and Vero E6 cells.",
+      "how_opened": "full text",
+      "quote": "We isolated virus from nasopharyngeal and oropharyngeal specimens from this patient and characterized the viral sequence, replication properties, and cell culture tropism. We found that the virus replicates to high titer in Vero-CCL81 cells and Vero E6 cells in the absence of trypsin.",
+      "kind": "isolation-or-culture"
+    },
+    {
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7366528",
+      "doi": "10.4103/ijmr.IJMR_1029_20",
+      "title": "First isolation of SARS-CoV-2 from clinical samples in India",
+      "year": "2020",
+      "authors_or_institution": "Sarkale P, Patil S, Yadav PD, et al.; ICMR-National Institute of Virology, Pune",
+      "why_relevant": "Reports successful isolation in Vero CCL-81 cells, and documents that initial isolation attempts from the first three Indian cases failed due to low titres.",
+      "how_opened": "full text",
+      "quote": "We describe here the successful isolation and characterization of SARS-CoV-2 from clinical samples in India using Vero CCL-81 cells by observing cytopathic effects (CPEs) and cycle threshold (Ct) values in real-time reverse transcription-polymerase chain reaction (RT-PCR), electron microscopy and next-generation sequencing (NGS). ... In India, initial attempts to isolate the virus from the first three cases did not succeed due to low titres in the clinical specimens.",
+      "kind": "isolation-or-culture"
+    },
+    {
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7586445",
+      "doi": "10.1590/0074-02760200342",
+      "title": "SARS-CoV-2 isolation from the first reported patients in Brazil and establishment of a coordinated task network",
+      "year": "2020",
+      "authors_or_institution": "Araujo DB, Machado RRG, et al.; University of Sao Paulo / Instituto Adolfo Lutz",
+      "why_relevant": "Describes isolation and propagation of SARS-CoV-2 from Brazil's first confirmed COVID-19 cases in Vero cells.",
+      "how_opened": "full text",
+      "quote": "The virus isolate was recovered from nasopharyngeal specimen, propagated in Vero cells (E6, CCL-81 and hSLAM), with clear cytopathic effects, and characterised by full genome sequencing, electron microscopy and in vitro replication properties.",
+      "kind": "isolation-or-culture"
+    },
+    {
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7045880",
+      "doi": "10.24171/j.phrp.2020.11.1.02",
+      "title": "Identification of Coronavirus Isolated from a Patient in Korea with COVID-19",
+      "year": "2020",
+      "authors_or_institution": "Kim JM, Chung YS, Jo HJ, et al.; Korea Centers for Disease Control and Prevention",
+      "why_relevant": "Korea CDC report of SARS-CoV-2 isolation from a patient specimen in Vero cells, confirmed by cytopathic effect, genome sequencing and electron microscopy.",
+      "how_opened": "full text",
+      "quote": "The virus replicated in Vero cells and cytopathic effects were observed. Full genome sequencing showed that the virus genome exhibited sequence homology of more than 99.9% with SARS-CoV-2 which was isolated from patients from other countries, for instance China.",
+      "kind": "isolation-or-culture"
+    }
+  ],
+  "notes": "All four sources opened as full text (PMC or CDC journal HTML). Three English searches were run. No separate published critique of isolation methods was located; the India source documents failed initial isolation attempts (first three cases, low titres) within a successful-isolation report. DOI for the CDC source was not printed on the opened page and is left empty per citation rules."
+}

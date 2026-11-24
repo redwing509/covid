@@ -1,0 +1,11 @@
+{
+  "url_opened": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7366528",
+  "doi": "",
+  "title": "First isolation of SARS-CoV-2 from clinical samples in India",
+  "claim": "the recorded quote was verbatim on the opened page",
+  "verdict": "TRUE",
+  "quote": "We describe here the successful isolation and characterization of SARS-CoV-2 from clinical samples in India using Vero CCL-81 cells by observing cytopathic effects (CPEs) and cycle threshold (Ct) values in real-time reverse transcription-polymerase chain reaction (RT-PCR), electron microscopy and next-generation sequencing (NGS). ... In India, initial attempts to isolate the virus from the first three cases did not succeed due to low titres in the clinical specimens.",
+  "how_verified": "Opened the URL with web_extract; compared the recorded title and both sentences of the recorded quote against the retrieved full text line by line. The page title matches exactly. Sentence 1 appears verbatim in the opening paragraph (saved text line 3). Sentence 2 appears verbatim in the closing paragraph (saved text line 78).",
+  "how_opened": "full text",
+  "limitations": "The DOI was not visible in the extracted page text (extraction began at the body 'Sir,'; the journal header/citation metadata carrying the DOI was not captured), so doi is left empty rather than guessed. No paywall or retraction notice was encountered; none checked beyond body text."
+}

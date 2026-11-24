@@ -5,7 +5,7 @@
 > Do not start, stop, or replace any treatment on the basis of these notes.
 > Results, when they exist, are reported as graded evidence, not as a recommendation.
 
-**Status (21 Nov 2026, Pacific Time, 11:27 PM):** project skeleton plus the authorized tool install (t1227s6218), and a first Test 1 run on this host. James t1251u lifted the reset hold; t1252u / t1253u asked for one Covid run, which was Test 1. The pre-registered letter from that run is **B-blast**, written up in [`results/test-01/TEST-01-RESULT.md`](results/test-01/TEST-01-RESULT.md). H-A and H-B have not been tested. This is not medical advice.
+**Status (24 Nov 2026, Pacific Time):** project skeleton plus the authorized tool install (t1227s6218), a first Test 1 run on this host (letter **B-blast**, [`results/test-01/TEST-01-RESULT.md`](results/test-01/TEST-01-RESULT.md)), and a first literature check for the unit 2 isolation-and-culture sub-unit ([`results/unit-02-isolation-culture/UNIT-02-ISOLATION-CULTURE.md`](results/unit-02-isolation-culture/UNIT-02-ISOLATION-CULTURE.md)). The rest of unit 2, and H-A and H-B as a whole, have not been tested. This is not medical advice.
 
 This project was started at James's request (t1225u, confirmed t1225s6200; hypotheses clarified t1226u and t1227u). It is an evidence review. Evidence decides. Results are reported whichever way they land. There is **no email** on this project. Nothing is pushed to a remote or merged without the full review set and James's yes. James asked for the initial public publication of this reviewed skeleton to [redwing509/covid](https://github.com/redwing509/covid) (t1227s6218); that push happens only after the full review set on this tree.
 

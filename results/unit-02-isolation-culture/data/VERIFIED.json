@@ -1,0 +1,110 @@
+[
+  {
+    "source": {
+      "i": 1,
+      "url": "https://wwwnc.cdc.gov/eid/article/26/6/20-0516_article",
+      "doi": "",
+      "title": "Severe Acute Respiratory Syndrome Coronavirus 2 from Patient with Coronavirus Disease, United States",
+      "year": "2020",
+      "authors_or_institution": "Harcourt J, Tamin A, Lu X, et al.; US Centers for Disease Control and Prevention",
+      "why_relevant": "Primary isolation report from the first US COVID-19 patient; virus propagated in Vero CCL-81 and Vero E6 cells.",
+      "how_opened": "full text",
+      "quote": "We isolated virus from nasopharyngeal and oropharyngeal specimens from this patient and characterized the viral sequence, replication properties, and cell culture tropism. We found that the virus replicates to high titer in Vero-CCL81 cells and Vero E6 cells in the absence of trypsin.",
+      "kind": "isolation-or-culture"
+    },
+    "verify_file": "/workspace/research-rotation/t1358u/covid-unit2-isolation/runs/VERIFY-S01.json",
+    "verdict": "TRUE",
+    "verify": {
+      "url_opened": "https://wwwnc.cdc.gov/eid/article/26/6/20-0516_article",
+      "doi": "",
+      "title": "Severe Acute Respiratory Syndrome Coronavirus 2 from Patient with Coronavirus Disease, United States",
+      "claim": "the recorded quote was verbatim on the opened page",
+      "verdict": "TRUE",
+      "quote": "We isolated virus from nasopharyngeal and oropharyngeal specimens from this patient and characterized the viral sequence, replication properties, and cell culture tropism. We found that the virus replicates to high titer in Vero-CCL81 cells and Vero E6 cells in the absence of trypsin.",
+      "how_verified": "Opened the URL with web_extract; the full article text was saved locally and the Abstract was compared character-for-character with the recorded quote; the printed title was also compared.",
+      "how_opened": "full text",
+      "limitations": "The page does not print the article's own DOI (only reference DOIs appear), so doi is left empty. No other limitations; the complete page (abstract, methods, results, discussion, references) was retrieved and read."
+    }
+  },
+  {
+    "source": {
+      "i": 2,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7366528",
+      "doi": "10.4103/ijmr.IJMR_1029_20",
+      "title": "First isolation of SARS-CoV-2 from clinical samples in India",
+      "year": "2020",
+      "authors_or_institution": "Sarkale P, Patil S, Yadav PD, et al.; ICMR-National Institute of Virology, Pune",
+      "why_relevant": "Reports successful isolation in Vero CCL-81 cells, and documents that initial isolation attempts from the first three Indian cases failed due to low titres.",
+      "how_opened": "full text",
+      "quote": "We describe here the successful isolation and characterization of SARS-CoV-2 from clinical samples in India using Vero CCL-81 cells by observing cytopathic effects (CPEs) and cycle threshold (Ct) values in real-time reverse transcription-polymerase chain reaction (RT-PCR), electron microscopy and next-generation sequencing (NGS). ... In India, initial attempts to isolate the virus from the first three cases did not succeed due to low titres in the clinical specimens.",
+      "kind": "isolation-or-culture"
+    },
+    "verify_file": "/workspace/research-rotation/t1358u/covid-unit2-isolation/runs/VERIFY-S02.json",
+    "verdict": "TRUE",
+    "verify": {
+      "url_opened": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7366528",
+      "doi": "",
+      "title": "First isolation of SARS-CoV-2 from clinical samples in India",
+      "claim": "the recorded quote was verbatim on the opened page",
+      "verdict": "TRUE",
+      "quote": "We describe here the successful isolation and characterization of SARS-CoV-2 from clinical samples in India using Vero CCL-81 cells by observing cytopathic effects (CPEs) and cycle threshold (Ct) values in real-time reverse transcription-polymerase chain reaction (RT-PCR), electron microscopy and next-generation sequencing (NGS). ... In India, initial attempts to isolate the virus from the first three cases did not succeed due to low titres in the clinical specimens.",
+      "how_verified": "Opened the URL with web_extract; compared the recorded title and both sentences of the recorded quote against the retrieved full text line by line. The page title matches exactly. Sentence 1 appears verbatim in the opening paragraph (saved text line 3). Sentence 2 appears verbatim in the closing paragraph (saved text line 78).",
+      "how_opened": "full text",
+      "limitations": "The DOI was not visible in the extracted page text (extraction began at the body 'Sir,'; the journal header/citation metadata carrying the DOI was not captured), so doi is left empty rather than guessed. No paywall or retraction notice was encountered; none checked beyond body text."
+    }
+  },
+  {
+    "source": {
+      "i": 3,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7586445",
+      "doi": "10.1590/0074-02760200342",
+      "title": "SARS-CoV-2 isolation from the first reported patients in Brazil and establishment of a coordinated task network",
+      "year": "2020",
+      "authors_or_institution": "Araujo DB, Machado RRG, et al.; University of Sao Paulo / Instituto Adolfo Lutz",
+      "why_relevant": "Describes isolation and propagation of SARS-CoV-2 from Brazil's first confirmed COVID-19 cases in Vero cells.",
+      "how_opened": "full text",
+      "quote": "The virus isolate was recovered from nasopharyngeal specimen, propagated in Vero cells (E6, CCL-81 and hSLAM), with clear cytopathic effects, and characterised by full genome sequencing, electron microscopy and in vitro replication properties.",
+      "kind": "isolation-or-culture"
+    },
+    "verify_file": "/workspace/research-rotation/t1358u/covid-unit2-isolation/runs/VERIFY-S03.json",
+    "verdict": "TRUE",
+    "verify": {
+      "url_opened": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7586445",
+      "doi": "10.1590/0074-02760200342",
+      "title": "SARS-CoV-2 isolation from the first reported patients in Brazil and establishment of a coordinated task network",
+      "claim": "the recorded quote was verbatim on the opened page",
+      "verdict": "TRUE",
+      "quote": "The virus isolate was recovered from nasopharyngeal specimen, propagated in Vero cells (E6, CCL-81 and hSLAM), with clear cytopathic effects, and characterised by full genome sequencing, electron microscopy and in vitro replication properties.",
+      "how_verified": "web_extract of https://pmc.ncbi.nlm.nih.gov/articles/PMC7586445; compared the recorded quote character-by-character against the page text",
+      "how_opened": "full text",
+      "limitations": "none"
+    }
+  },
+  {
+    "source": {
+      "i": 4,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7045880",
+      "doi": "10.24171/j.phrp.2020.11.1.02",
+      "title": "Identification of Coronavirus Isolated from a Patient in Korea with COVID-19",
+      "year": "2020",
+      "authors_or_institution": "Kim JM, Chung YS, Jo HJ, et al.; Korea Centers for Disease Control and Prevention",
+      "why_relevant": "Korea CDC report of SARS-CoV-2 isolation from a patient specimen in Vero cells, confirmed by cytopathic effect, genome sequencing and electron microscopy.",
+      "how_opened": "full text",
+      "quote": "The virus replicated in Vero cells and cytopathic effects were observed. Full genome sequencing showed that the virus genome exhibited sequence homology of more than 99.9% with SARS-CoV-2 which was isolated from patients from other countries, for instance China.",
+      "kind": "isolation-or-culture"
+    },
+    "verify_file": "/workspace/research-rotation/t1358u/covid-unit2-isolation/runs/VERIFY-S04.json",
+    "verdict": "TRUE",
+    "verify": {
+      "url_opened": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7045880",
+      "doi": "",
+      "title": "Identification of Coronavirus Isolated from a Patient in Korea with COVID-19",
+      "claim": "the recorded quote was verbatim on the opened page",
+      "verdict": "TRUE",
+      "quote": "The virus replicated in Vero cells and cytopathic effects were observed. Full genome sequencing showed that the virus genome exhibited sequence homology of more than 99.9% with SARS-CoV-2 which was isolated from patients from other countries, for instance China.",
+      "how_verified": "Opened the URL with web_extract (two fetches to the same host, both returned full text) and compared the recorded quote character-by-character against the Abstract > Results section of the opened PMC page; it matches exactly, including punctuation.",
+      "how_opened": "full text",
+      "limitations": "No DOI line appeared in the extracted page text (page shows PMCID PMC7045880, PMID 32149036), so doi is left empty; journal, date, and other reference metadata were not captured; per task rules only this URL was opened."
+    }
+  }
+]

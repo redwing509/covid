@@ -1,0 +1,39 @@
+{
+  "checked": "2026-11-24 11:23:07 AM PST",
+  "rows": [
+    {
+      "url": "https://wwwnc.cdc.gov/eid/article/26/6/20-0516_article",
+      "title": "Severe Acute Respiratory Syndrome Coronavirus 2 from Patient with Coronavirus Disease, United States",
+      "http_status": 200,
+      "quote_check": "VERBATIM",
+      "bytes": 411569,
+      "error": ""
+    },
+    {
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7366528",
+      "title": "First isolation of SARS-CoV-2 from clinical samples in India",
+      "http_status": 200,
+      "quote_check": "PARTS_VERBATIM",
+      "bytes": 161444,
+      "error": "",
+      "note": "The recorded quote joins two sentences with an ellipsis. Each sentence appears verbatim on the opened PMC HTML. The joined string does not appear as a single contiguous quote."
+    },
+    {
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7586445",
+      "title": "SARS-CoV-2 isolation from the first reported patients in Brazil and establishment of a coordinated task network",
+      "http_status": 200,
+      "quote_check": "VERBATIM",
+      "bytes": 178761,
+      "error": ""
+    },
+    {
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7045880",
+      "title": "Identification of Coronavirus Isolated from a Patient in Korea with COVID-19",
+      "http_status": 200,
+      "quote_check": "VERBATIM",
+      "bytes": 134722,
+      "error": ""
+    }
+  ],
+  "summary": "3/4 quotes contiguous verbatim on the opened pages; 1/4 (India, PMC7366528) is two verbatim sentences joined by an ellipsis."
+}

@@ -1,0 +1,23 @@
+# Unit 2, first sub-unit — sources opened
+
+Pass 1 list only. Findings from these sources are written in [`UNIT-02-ISOLATION-CULTURE.md`](UNIT-02-ISOLATION-CULTURE.md). Dates are Pacific Time, 24 Nov 2026. “How opened” is what was actually retrieved, not what the publisher’s button promised.
+
+## Isolation and culture papers
+
+| # | Title (as printed) | Locator | How opened | One quote (verbatim) | Checked? |
+|---|---|---|---|---|---|
+| S01 | Severe Acute Respiratory Syndrome Coronavirus 2 from Patient with Coronavirus Disease, United States | https://wwwnc.cdc.gov/eid/article/26/6/20-0516_article ; DOI 10.3201/eid2606.200516 | full text (CDC EID HTML, HTTP 200) | “We isolated virus from nasopharyngeal and oropharyngeal specimens from this patient and characterized the viral sequence, replication properties, and cell culture tropism.” | Yes — quote contiguous on the opened page (controller fetch and Hermes verify TRUE). |
+| S02 | First isolation of SARS-CoV-2 from clinical samples in India | https://pmc.ncbi.nlm.nih.gov/articles/PMC7366528/ ; DOI 10.4103/ijmr.IJMR_1029_20 | full text (PMC HTML, HTTP 200) | “We describe here the successful isolation and characterization of SARS-CoV-2 from clinical samples in India using Vero CCL-81 cells by observing cytopathic effects (CPEs) and cycle threshold (Ct) values in real-time reverse transcription-polymerase chain reaction (RT-PCR), electron microscopy and next-generation sequencing (NGS).” and, later on the same page, “In India, initial attempts to isolate the virus from the first three cases did not succeed due to low titres in the clinical specimens.” | Yes — each sentence is on the opened page. A first-pass joined quote with an ellipsis is not treated as one contiguous quote. |
+| S03 | SARS-CoV-2 isolation from the first reported patients in Brazil and establishment of a coordinated task network | https://pmc.ncbi.nlm.nih.gov/articles/PMC7586445/ ; DOI 10.1590/0074-02760200342 | full text (PMC HTML, HTTP 200) | “The virus isolate was recovered from nasopharyngeal specimen, propagated in Vero cells (E6, CCL-81 and hSLAM), with clear cytopathic effects, and characterised by full genome sequencing, electron microscopy and in vitro replication properties.” | Yes — quote contiguous on the opened page (controller fetch and Hermes verify TRUE). |
+| S04 | Identification of Coronavirus Isolated from a Patient in Korea with COVID-19 | https://pmc.ncbi.nlm.nih.gov/articles/PMC7045880/ ; DOI 10.24171/j.phrp.2020.11.1.02 | full text (PMC HTML, HTTP 200) | “The virus replicated in Vero cells and cytopathic effects were observed.” “Full genome sequencing showed that the virus genome exhibited sequence homology of more than 99.9% with SARS-CoV-2 which was isolated from patients from other countries, for instance China.” | Yes — quotes contiguous on the opened page (controller fetch and Hermes verify TRUE). |
+
+## Comment and reply
+
+| # | Title (as printed) | Locator | How opened | One quote (verbatim) | Checked? |
+|---|---|---|---|---|---|
+| D01 | Comments on Kämmerer, et al. (2023) regarding RT-PCR Testing | https://ijvtpr.com/index.php/IJVTPR/article/view/81 ; official PDF https://ijvtpr.com/index.php/IJVTPR/article/download/81/401/717 ; DOI 10.56098/ijvtpr.v3i1.81 | Landing page abstract only at first (Hermes verify FALSE for the recorded quote). Official journal PDF later opened (HTTP 200, application/pdf). | From the official PDF: “As a matter of fact, in order to test even the first and second of Koch’s postulates, we must have a purified germ and a well specified disease.” | The first Hermes quote was not verbatim and is not used. The PDF wording was copied after the official PDF was opened. |
+| D02 | Response to Comments on Kämmerer, et al. (2023) regarding RT-PCR Testing | https://ijvtpr.com/index.php/IJVTPR/article/view/82 ; official PDF https://ijvtpr.com/index.php/IJVTPR/article/download/82/217/422 ; DOI 10.56098/ijvtpr.v3i1.82 | full text of the abstract on the landing page (HTTP 200); official journal PDF also opened | “They point to the lack of a specific definition of COVID-19 disease and conclude that, in order to test the first and the second of Koch’s postulates, there must be both a purified germ and a specified disease, neither of which was available for COVID-19.” | Yes — on the landing-page abstract and in the official PDF, with typographic apostrophes (Koch’s). |
+
+## Search limits
+
+Hermes also ran English searches aimed at failed isolations and published disputes or replies. Besides the four isolation papers and the IJVTPR comment/reply pair, no further peer-reviewed isolation-method dispute with a published reply was added to this list from those jobs. Broader “not isolated” claims on blogs were not opened as sources.
