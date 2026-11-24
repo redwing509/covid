@@ -1,0 +1,29 @@
+[
+  {
+    "source": {
+      "i": 2,
+      "url": "https://ijvtpr.com/index.php/IJVTPR/article/view/82",
+      "doi": "10.56098/ijvtpr.v3i1.82",
+      "title": "Response to Comments on Kämmerer, et al. (2023) regarding RT-PCR Testing",
+      "year": "2023",
+      "authors_or_institution": "Ulrike Kämmerer, Sona Pekova, Rainer J. Klement, Rogier Louwen, Pieter Borger, Klaus Steger (Universitätsklinikum Würzburg)",
+      "why_relevant": "Formal journal reply defending standard cell-culture isolation of SARS-CoV-2 and addressing the Koch's-postulates/purification objection raised in the comment.",
+      "how_opened": "full text",
+      "quote": "They point to the lack of a specific definition of COVID-19 disease and conclude that, in order to test the first and the second of Koch's postulates, there must be both a purified germ and a specified disease, neither of which was available for COVID-19. In reply, we address two questions they did not ask: ... 2. Are Koch's postulates valid for viruses?",
+      "kind": "reply"
+    },
+    "verify_file": "/workspace/research-rotation/t1358u/covid-unit2-isolation/runs/VERIFY-D02.json",
+    "verdict": "TRUE",
+    "verify": {
+      "url_opened": "https://ijvtpr.com/index.php/IJVTPR/article/view/82",
+      "doi": "",
+      "title": "Response to Comments on Kämmerer, et al. (2023) regarding RT-PCR Testing",
+      "claim": "the recorded quote was verbatim on the opened page",
+      "verdict": "TRUE",
+      "quote": "They point to the lack of a specific definition of COVID-19 disease and conclude that, in order to test the first and the second of Koch’s postulates, there must be both a purified germ and a specified disease, neither of which was available for COVID-19. In reply, we address two questions they did not ask: ... 2. Are Koch’s postulates valid for viruses?",
+      "how_verified": "web_extract of the URL; compared the recorded quote against the page text",
+      "how_opened": "full text",
+      "limitations": "The recorded quote uses straight apostrophes (') where the page uses typographic apostrophes (’); the “...” in the recorded quote stands in for item 1 (“1. Are clinical symptoms induced by SARS-CoV-2 corroborated by RT-PCR?”), which appears verbatim on the page immediately before item 2; no DOI was visible on the opened page."
+    }
+  }
+]

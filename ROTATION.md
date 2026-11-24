@@ -29,3 +29,8 @@ This is a long list of units, not a conclusion. Later claimants or sub-questions
 ## Unit 1 run (t1252u / t1253u)
 
 Test 1 was run on the decision host on 21 Nov 2026, evening Pacific Time, as a manual Covid unit run requested by James t1252u / t1253u after the t1251u hold lift. The pre-registered letter is **B-blast**. Write-up: [`results/test-01/TEST-01-RESULT.md`](results/test-01/TEST-01-RESULT.md). No email was sent. The pull request that carries this run is not merged without James's yes.
+
+
+## Unit 2, first sub-unit (t1358u)
+
+Pathogen-existence checks, isolation and culture only, were run as bite-size Hermes jobs on 24 Nov 2026, Pacific Time, on NVIDIA NIM Nemotron 3.5 Super VL, then citation-checked by fetching the cited pages. Write-up: [`results/unit-02-isolation-culture/UNIT-02-ISOLATION-CULTURE.md`](results/unit-02-isolation-culture/UNIT-02-ISOLATION-CULTURE.md). This does not finish the rest of unit 2 (electron microscopy, transmission, animal challenge, variant tracking), and it is not a conclusion about H-A or H-B. No email was sent. The pull request that carries this write-up is not merged without James's yes.

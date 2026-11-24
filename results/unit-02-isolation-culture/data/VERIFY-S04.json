@@ -1,0 +1,11 @@
+{
+  "url_opened": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7045880",
+  "doi": "",
+  "title": "Identification of Coronavirus Isolated from a Patient in Korea with COVID-19",
+  "claim": "the recorded quote was verbatim on the opened page",
+  "verdict": "TRUE",
+  "quote": "The virus replicated in Vero cells and cytopathic effects were observed. Full genome sequencing showed that the virus genome exhibited sequence homology of more than 99.9% with SARS-CoV-2 which was isolated from patients from other countries, for instance China.",
+  "how_verified": "Opened the URL with web_extract (two fetches to the same host, both returned full text) and compared the recorded quote character-by-character against the Abstract > Results section of the opened PMC page; it matches exactly, including punctuation.",
+  "how_opened": "full text",
+  "limitations": "No DOI line appeared in the extracted page text (page shows PMCID PMC7045880, PMID 32149036), so doi is left empty; journal, date, and other reference metadata were not captured; per task rules only this URL was opened."
+}

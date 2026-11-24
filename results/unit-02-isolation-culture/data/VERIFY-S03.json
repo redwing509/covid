@@ -1,0 +1,11 @@
+{
+  "url_opened": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7586445",
+  "doi": "10.1590/0074-02760200342",
+  "title": "SARS-CoV-2 isolation from the first reported patients in Brazil and establishment of a coordinated task network",
+  "claim": "the recorded quote was verbatim on the opened page",
+  "verdict": "TRUE",
+  "quote": "The virus isolate was recovered from nasopharyngeal specimen, propagated in Vero cells (E6, CCL-81 and hSLAM), with clear cytopathic effects, and characterised by full genome sequencing, electron microscopy and in vitro replication properties.",
+  "how_verified": "web_extract of https://pmc.ncbi.nlm.nih.gov/articles/PMC7586445; compared the recorded quote character-by-character against the page text",
+  "how_opened": "full text",
+  "limitations": "none"
+}

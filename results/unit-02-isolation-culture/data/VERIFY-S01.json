@@ -1,0 +1,11 @@
+{
+  "url_opened": "https://wwwnc.cdc.gov/eid/article/26/6/20-0516_article",
+  "doi": "",
+  "title": "Severe Acute Respiratory Syndrome Coronavirus 2 from Patient with Coronavirus Disease, United States",
+  "claim": "the recorded quote was verbatim on the opened page",
+  "verdict": "TRUE",
+  "quote": "We isolated virus from nasopharyngeal and oropharyngeal specimens from this patient and characterized the viral sequence, replication properties, and cell culture tropism. We found that the virus replicates to high titer in Vero-CCL81 cells and Vero E6 cells in the absence of trypsin.",
+  "how_verified": "Opened the URL with web_extract; the full article text was saved locally and the Abstract was compared character-for-character with the recorded quote; the printed title was also compared.",
+  "how_opened": "full text",
+  "limitations": "The page does not print the article's own DOI (only reference DOIs appear), so doi is left empty. No other limitations; the complete page (abstract, methods, results, discussion, references) was retrieved and read."
+}

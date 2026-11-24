@@ -1,6 +1,6 @@
 # Plan
 
-**Status (21 Nov 2026, Pacific Time, 11:27 PM):** plan and pre-registered Test 1 decision rule, plus the authorized tool install (t1227s6218). James t1251u (confirmed for a first run by t1252u / t1253u) lifted the reset hold. Test 1 has now been run on the decision host; the pre-registered letter is **B-blast**, written up in [`results/test-01/TEST-01-RESULT.md`](results/test-01/TEST-01-RESULT.md). H-A and H-B have not been tested. No causal hypothesis has been accepted or rejected.
+**Status (24 Nov 2026, Pacific Time):** plan and pre-registered Test 1 decision rule, plus the authorized tool install (t1227s6218). Test 1 has been run on the decision host; the pre-registered letter is **B-blast**, written up in [`results/test-01/TEST-01-RESULT.md`](results/test-01/TEST-01-RESULT.md). A first literature check for the unit 2 isolation-and-culture sub-unit is written up in [`results/unit-02-isolation-culture/UNIT-02-ISOLATION-CULTURE.md`](results/unit-02-isolation-culture/UNIT-02-ISOLATION-CULTURE.md). The rest of the unit 2 checks, and H-A and H-B as a whole, have not been tested. No causal hypothesis has been accepted or rejected.
 
 This file lists the testable predictions of each claim and how each will be checked. Methods and citation rules are in [`METHOD.md`](METHOD.md). Programs are in [`TOOLS.md`](TOOLS.md).
 
@@ -11,6 +11,7 @@ This file lists the testable predictions of each claim and how each will be chec
 | 21 Nov 2026, evening | 42b5a19 | Lifted the plan text that had deferred the first research run, including Test 1 compute, until after the Mon 23 Nov 2026, 9:49 PM Pacific Time usage reset. Test 1 may now be started under the already pre-registered protocol. The decision rule is unchanged. | James t1251u lifted the hold; t1252u / t1253u asked for one Covid run, which is Test 1 | No |
 | 21 Nov 2026, evening | 42b5a19 | In the Test 1 “What would be inconclusive” summary, named the step 8 site-homology trim (C-homology) among the examples. [`tests/TEST-01-genome-classification.md`](tests/TEST-01-genome-classification.md) still governs if this summary and the protocol differ. The decision rule is unchanged. | Residual CodeRabbit / Claude r6 nit (PLAN wording, Claude r6 N-4) | No |
 | 21 Nov 2026, late evening | 1653a1b | Logged that the 42b5a19 plan rows were committed in the same revision as the Test 1 outputs, and that their pre-data status rests on the run log. Noted the post-run runner fix (Claude M1) that does not change the letter. The decision rule is unchanged. | Claude Test 1 review S3, plus the M1 runner fix | Yes (Test 1 already run; letter B-blast unchanged) |
+| 24 Nov 2026, late morning | 83b255f | Logged a first, citation-checked literature write-up for the unit 2 isolation-and-culture sub-unit only. The Test 1 letter, and the remaining unit 2 checks, are unchanged. No causal hypothesis is accepted or rejected. | James t1358u asked for Hermes research and a GitHub results PR; this is that sub-unit | Yes (published papers and a comment/reply, as listed in the write-up) |
 
 The 42b5a19 rows above were written to the working tree before any Test 1 input was opened. They were committed in the same revision as the Test 1 outputs (`42b5a19`). Git cannot confirm that on-disk order; their pre-data status rests on the Test 1 run log.
 
@@ -20,7 +21,7 @@ The 42b5a19 rows above were written to the working tree before any Test 1 input 
 2. **Pathogen-existence and transmission checks** that H-A needs, and that H-B must also confront (isolation and culture, electron microscopy, household and other transmission studies, animal challenge studies, variant tracking).
 3. **H-B immune-compromise checks** (illness rates versus 5G rollout timing, location, and speed; pre-5G pandemics; places with no 5G; seasonality; controlled RF-exposure immune-marker studies, including nulls; dose-response; SAR at deployed power; any peer-reviewed paper that claims a 5G–COVID or 5G–immune link, including retractions).
 
-The reset hold was lifted by James t1251u (first Covid run requested t1252u / t1253u). Test 1 was run on the decision host on 21 Nov 2026, evening Pacific Time. The pre-registered letter is **B-blast**; see [`results/test-01/TEST-01-RESULT.md`](results/test-01/TEST-01-RESULT.md). No Hermes survey is started for this project yet. No email is sent.
+The reset hold was lifted by James t1251u (first Covid run requested t1252u / t1253u). Test 1 was run on the decision host on 21 Nov 2026, evening Pacific Time. The pre-registered letter is **B-blast**; see [`results/test-01/TEST-01-RESULT.md`](results/test-01/TEST-01-RESULT.md). A first isolation-and-culture literature check has now been written up (t1358u); the rest of unit 2 has not been run. No email is sent.
 
 ## Test 1 — do the public sequences labeled as the COVID-19 reference pathogen group with influenza references? (open)
 
@@ -81,7 +82,7 @@ The original request also asked whether the virus claim was a cover for 5G deplo
 
 ## What will not be done yet
 
-- The reset hold was lifted by James t1251u (first Covid run requested t1252u / t1253u). Test 1 has been run (letter B-blast). No Hermes literature survey is started yet.
+- The reset hold was lifted by James t1251u (first Covid run requested t1252u / t1253u). Test 1 has been run (letter B-blast). A first isolation-and-culture literature check has been written up (t1358u); later unit 2 checks have not been run.
 - The BLAST+, MAFFT, IQ-TREE, R/metafor, and Python statistics install is done (t1227s6218; see [`TOOLS.md`](TOOLS.md)). Further new packages still need a separate OK. No installs on rig1 or the laptop.
 - No email.
 

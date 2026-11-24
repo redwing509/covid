@@ -1,0 +1,53 @@
+{
+  "entries": [
+    {
+      "claim_or_test": "H-A isolation and culture",
+      "url": "https://wwwnc.cdc.gov/eid/article/26/6/20-0516_article",
+      "doi": "",
+      "title": "Severe Acute Respiratory Syndrome Coronavirus 2 from Patient with Coronavirus Disease, United States",
+      "what_was_measured": "Isolation of virus from nasopharyngeal and oropharyngeal specimens; replication in Vero-CCL81 and Vero E6 cells without trypsin",
+      "population_or_system": "First US COVID-19 patient specimen; Vero CCL-81 and Vero E6 cells",
+      "measured_result_quote": "We isolated virus from nasopharyngeal and oropharyngeal specimens from this patient and characterized the viral sequence, replication properties, and cell culture tropism. We found that the virus replicates to high titer in Vero-CCL81 cells and Vero E6 cells in the absence of trypsin.",
+      "evidence_level": "in vitro",
+      "how_opened": "full text",
+      "negatives_or_limits": "No negative or failed isolation reported in the opened quote; article DOI not printed on the page (left empty)"
+    },
+    {
+      "claim_or_test": "H-A isolation and culture",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7366528",
+      "doi": "10.4103/ijmr.IJMR_1029_20",
+      "title": "First isolation of SARS-CoV-2 from clinical samples in India",
+      "what_was_measured": "Isolation and characterization of SARS-CoV-2 from clinical samples using Vero CCL-81 cells, CPEs, RT-PCR Ct values, electron microscopy, NGS",
+      "population_or_system": "Clinical samples from COVID-19 cases in India; Vero CCL-81 cells",
+      "measured_result_quote": "We describe here the successful isolation and characterization of SARS-CoV-2 from clinical samples in India using Vero CCL-81 cells by observing cytopathic effects (CPEs) and cycle threshold (Ct) values in real-time reverse transcription-polymerase chain reaction (RT-PCR), electron microscopy and next-generation sequencing (NGS). ... In India, initial attempts to isolate the virus from the first three cases did not succeed due to low titres in the clinical specimens.",
+      "evidence_level": "in vitro",
+      "how_opened": "full text",
+      "negatives_or_limits": "Initial isolation attempts from the first three cases failed due to low titres in the clinical specimens"
+    },
+    {
+      "claim_or_test": "H-A isolation and culture",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7586445",
+      "doi": "10.1590/0074-02760200342",
+      "title": "SARS-CoV-2 isolation from the first reported patients in Brazil and establishment of a coordinated task network",
+      "what_was_measured": "Recovery of virus isolate from nasopharyngeal specimen; propagation in Vero cells (E6, CCL-81 and hSLAM); cytopathic effects; genome sequencing, electron microscopy, in vitro replication",
+      "population_or_system": "Nasopharyngeal specimen from Brazil's first confirmed COVID-19 cases; Vero cells (E6, CCL-81, hSLAM)",
+      "measured_result_quote": "The virus isolate was recovered from nasopharyngeal specimen, propagated in Vero cells (E6, CCL-81 and hSLAM), with clear cytopathic effects, and characterised by full genome sequencing, electron microscopy and in vitro replication properties.",
+      "evidence_level": "in vitro",
+      "how_opened": "full text",
+      "negatives_or_limits": "No failure or negative result reported in the opened quote"
+    },
+    {
+      "claim_or_test": "H-A isolation and culture",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7045880",
+      "doi": "10.24171/j.phrp.2020.11.1.02",
+      "title": "Identification of Coronavirus Isolated from a Patient in Korea with COVID-19",
+      "what_was_measured": "Virus replication in Vero cells and cytopathic effects; full genome sequencing; sequence homology with SARS-CoV-2 from other countries",
+      "population_or_system": "Specimen from a patient in Korea with COVID-19; Vero cells",
+      "measured_result_quote": "The virus replicated in Vero cells and cytopathic effects were observed. Full genome sequencing showed that the virus genome exhibited sequence homology of more than 99.9% with SARS-CoV-2 which was isolated from patients from other countries, for instance China.",
+      "evidence_level": "in vitro",
+      "how_opened": "full text",
+      "negatives_or_limits": "No failure or negative result reported in the opened quote"
+    }
+  ],
+  "notes": "All four entries copied verbatim from VERIFIED.json (verdict TRUE); no new sources added. DOIs for S01 and S04 were not printed on the opened pages and are left empty per the verify records. No opened quote reports quantitative titers; only S02 reports isolation failures (first three Indian cases, low titres)."
+}
